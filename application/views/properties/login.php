@@ -15,33 +15,20 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin" action="/SharedGroove/index.php/UserManagementController/insertUser" method="POST">
+    <form class="form-signin">
         <h1 class="h3 mb-3 font-weight-sitename">SharedGroove</h1>
-        <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
-
-        <label for="inputEmail" class="sr-only">First name</label>
-        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name" required autofocus>
-
-        <label for="inputEmail" class="sr-only">Last name</label>
-        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required autofocus>
-
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+        <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
         
-        <!-- Displaying the error message -->
-        <?php
-        if (isset($errorMessage)) {
-            echo "<label>".$errorMessage."</label>";
-        }
-        ?>
-
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        
         <div class="register-link">
-            <label>Already a member? <a href="<?php echo site_url('NavigationController/showLogin'); ?>"> Login </a></label>
+            <label>Not a member? <a href="<?php echo site_url('NavigationController/showRegister'); ?>"> Register </a></label>
         </div>
     </form>
 </body>

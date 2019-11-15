@@ -2,5 +2,8 @@
 A website to share music
 
 # The main branches
-master
+master /
 dev
+
+# Technologies
+php / HTML / CSS / MySql

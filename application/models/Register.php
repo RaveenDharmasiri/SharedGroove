@@ -4,8 +4,8 @@ class Register extends CI_Model
 
     public function __construct()
     { 
-        $this->load->database();
         parent:: __construct();
+        $this->load->database();
     }
 
     public function checkIfEmailAlreadyExists($email) {
@@ -24,13 +24,6 @@ class Register extends CI_Model
             'password'=>$password
         );
 
-        $this->db->insert('User', $userData);
-
-        $error = $this->db->_error_message();;
-        if ($error) {
-            var_dump($error);
-        }
-
-        
+        $this->db->insert('User', $userData);    
     }
 }

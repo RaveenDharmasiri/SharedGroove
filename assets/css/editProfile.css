@@ -36,3 +36,13 @@ label {
     margin-bottom: .5rem;
     color: white;
 }
+
+#profileImage {
+    display: none;
+}
+
+#profileDisplay {
+    vertical-align: middle;
+    border-style: groove;
+    width: 140px;
+}

@@ -1,0 +1,45 @@
+body {
+    background-color: #fed800;
+}
+
+.bg-white {
+    background-color: transparent !important;
+}
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 3.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    text-align: center;
+    font-weight: 600;
+}
+
+.h5 {
+    color: white;
+}
+
+.text-muted {
+    color: white !important;
+}
+
+.card-text {
+    color: white;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #20232d;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}

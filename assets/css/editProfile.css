@@ -1,0 +1,38 @@
+body {
+    /* background-image: url('../images/register_login_backgroundimage.jpg');
+    background-size: cover; */
+    margin-top: 20px;
+    background: #fed800
+}
+
+.font-weight-sitename {
+    font-size: 3.98rem;
+    font-weight: 300;
+    text-align: center;
+    background: transparent;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #23232d;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
+.text-nowrap {
+    white-space: nowrap!important;
+    color: white;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    color: white;
+}

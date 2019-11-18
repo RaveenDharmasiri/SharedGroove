@@ -55,7 +55,7 @@
 
                                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
+                                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><?php echo $firstName ." ". $lastName; ?></h4>
                                             <div class="mt-2">
                                                 <button for="profileImageUpload" class="btn btn-primary" type="button" onclick="triggerClick()">
                                                     <i class="fa fa-fw fa-camera"></i>
@@ -105,14 +105,16 @@
                                                     </div>
                                                 </div>
                                             </div> -->
-                                            <input class="form-control" type="email" name="userEmail" hidden/>
+                                            <input type="hidden" name="userEmail" value=<?php echo $email; ?>>
+                                            <input type="hidden" name="firstName" value=<?php echo $firstName; ?>>
+                                            <input type="hidden" name="lastName" value=<?php echo $lastName; ?>>
 
                                             <div class="row">
                                                 <div class="col-12 col-sm-6 mb-3">
                                                     <label class="select-menu-title">Select your favourite Genres</label>
                                                     <!-- <label class="text-white mb-3 lead">Select your favourite genres</label> -->
                                                     <!-- Multiselect dropdown -->
-                                                    <select multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100" name="genres[]">
+                                                    <select multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100" name="genres[]" required>
                                                         <option name="CountryMusic" value="Country Music">Country Music</option>
                                                         <option name="ClassicalMusic" value="Classical Music">Classical Music</option>
                                                         <option name="PopMusic" value="Pop Music">Pop Music</option>

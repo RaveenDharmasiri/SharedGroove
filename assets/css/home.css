@@ -16,6 +16,7 @@ body {
     white-space: nowrap;
     text-align: center;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .h5 {
@@ -42,4 +43,64 @@ body {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.38);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.card-title {
+    margin-bottom: .75rem;
+    color: white;
+}
+
+.full-name {
+    color: white !important;
+    margin-bottom: 17px;
+    font-size: x-large;
+}
+
+.genre-list {
+    color: white !important;
+}
+
+.followers-title {
+    color: black !important;
+    font-size: x-large;
+}
+
+.following-title {
+    color: black !important;
+    font-size: x-large;
+}
+
+.follower-count {
+    color: black !important;
+}
+
+.following-count {
+    color: black !important;
+}
+
+.publication-card {
+    margin-bottom: 20px;
+}
+
+.card-footer a {
+    color: #fed800;
+}
+
+.nav-item a {
+    color: #fed800;
+}
+
+.nav-item a:hover {
+    color: #fed80078;
+}
+
+.card-body hr {
+    border-top: solid 1px white;
 }

@@ -12,48 +12,48 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/home.css'); ?>" />
 
 <nav class="navbar navbar-light bg-white">
-    <a href="#" class="navbar-brand">SharedGroove</a>
-    <form class="form-inline">
+    <a class="navbar-brand">SharedGroove</a>
+    <!-- <form class="form-inline" action="/SharedGroove/index.php/FriendSearchController/findUser">
         <div class="input-group">
-            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control" name="searchValue" aria-label="Recipient's username" aria-describedby="button-addon2">
             <div class="input-group-append">
                 <button class="btn btn-outline-primary" type="button" id="button-addon2">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
         </div>
-    </form>
+    </form> -->
 </nav>
 
 
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
-            <div class="card" hidden>
+            <div class="card">
                 <div class="card-body">
-                    <div class="h5">@LeeCross</div>
-                    <div class="h7 text-muted">Fullname : Miracles Lee Cross</div>
-                    <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
+                    <div class="h7 full-name"><?php echo $this->session->userdata('firstName')." ". $this->session->userdata('lastName')?></div>
+                    <div class="h5">My favourite genres</div>
+                    <div class="h7 genre-list">Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
                         etc.
                     </div>
                 </div>
+
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <div class="h6 text-muted">Followers</div>
-                        <div class="h5">5.2342</div>
+                        <div class="h6 followers-title">Followers</div>
+                        <div class="h5 follower-count">5.2342</div>
                     </li>
                     <li class="list-group-item">
-                        <div class="h6 text-muted">Following</div>
-                        <div class="h5">6758</div>
+                        <div class="h6 following-title">Following</div>
+                        <div class="h5 following-count">6758</div>
                     </li>
-                    <li class="list-group-item">Vestibulum at eros</li>
                 </ul>
             </div>
         </div>
         <div class="col-md-6 gedf-main">
 
             <!--- \\\\\\\Post-->
-            <div class="card gedf-card">
+            <div class="card publication-card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -61,7 +61,7 @@
                                 a publication</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Images</a>
+                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Genre Search</a>
                         </li>
                     </ul>
                 </div>
@@ -73,32 +73,57 @@
                                 <textarea class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
                             </div>
 
+                            <div class="btn-toolbar justify-content-between">
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-primary">share</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile">
                                     <label class="custom-file-label" for="customFile">Upload image</label>
                                 </div>
                             </div>
-                            <div class="py-4"></div>
-                        </div>
-                    </div>
-                    <div class="btn-toolbar justify-content-between">
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-primary">share</button>
-                        </div>
-                        <div class="btn-group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-globe"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                            <div class="py-4"></div> -->
+                            <div class="card-body">
+                                <h5 class="card-title">Search user by genre</h5>
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Jazz')?>">Jazz</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Instrumental')?>">Instrumental</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Techno')?>">Techno</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Disco')?>">Disco</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Rock')?>">Rock</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+
+
+
                     </div>
+
                 </div>
             </div>
             <!-- Post /////-->
@@ -268,24 +293,25 @@
 
         </div>
         <div class="col-md-3">
-            <div class="card gedf-card" hidden>
+            <div class="card gedf-card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-            <div class="card gedf-card" hidden>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <h5 class="card-title">Shortcuts</h5>
+                    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+                    <hr />
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pop">Your Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Followers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Following</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Friends</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -31,17 +31,7 @@
       </div>
       <div class="clearfix"></div>
       <hr />
-      <div class="col-sm-12">
-        <div class="col-sm-2">
-          <img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="img-circle" width="60px">
-        </div>
-        <div class="col-sm-8">
-          <h4><a href="#">Ram Ranga Swami</a></h4>
-        </div>
-        <div class="col-sm-follow">
-          <a class="btn-follow" href="#">Follow</a>
-        </div>
-      </div>
+      
       <div class="clearfix"></div>
       <hr />
     </div>

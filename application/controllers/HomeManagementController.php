@@ -22,7 +22,7 @@ class HomeManagementController extends CI_Controller
             $this->load->view('properties/login');
         } else {
             $this->load->model('FollowerPageService/GetFollowers');
-            $userFollowers = $this->FollowerData->getUserFollowersEmails();
+            $userFollowers = $this->GetFollowers->getUserFollowersEmails();
             $returnArray = array(
                 'userFollowers' => $userFollowers
             );

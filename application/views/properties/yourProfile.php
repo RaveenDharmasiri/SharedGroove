@@ -13,16 +13,7 @@
 
 <nav class="navbar navbar-light bg-white">
     <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
-    <!-- <form class="form-inline" action="/SharedGroove/index.php/FriendSearchController/findUser">
-        <div class="input-group">
-            <input type="text" class="form-control" name="searchValue" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" id="button-addon2">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form> -->
+    
 </nav>
 
 
@@ -36,11 +27,11 @@
                     <div class="h5">My favourite genres</div>
                     <div class="h7 genre-list">
                         <?php
-                        for ($x = 0; $x < sizeof($userGenres) - 1; $x++) {
-                            echo $userGenres[$x] . ", ";
-                        }
+                            for($x=0; $x<sizeof($userGenres)-1; $x++) {
+                                echo $userGenres[$x].", ";
+                            }
 
-                        echo $userGenres[sizeof($userGenres) - 1];
+                            echo $userGenres[sizeof($userGenres)-1];
                         ?>
                     </div>
                 </div>
@@ -60,81 +51,7 @@
         <div class="col-md-6 gedf-main">
 
             <!--- \\\\\\\Post-->
-            <div class="card publication-card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Make
-                                a publication</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Genre Search</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <form action="<?php echo base_url('/index.php/HomeManagementController/postMessage') ?>" method="POST">
-                            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-                                <div class="form-group">
-                                    <label class="sr-only" for="message">post</label>
-                                    <textarea class="form-control" id="userPost" name="userPost" rows="3" placeholder="What are you thinking?"></textarea>
-                                </div>
-
-                                <div class="btn-toolbar justify-content-between">
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn btn-primary">Share</button>
-                                    </div>
-                                    <!-- <div class="btn-group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-globe"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                            <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                            </div>
-                        </form>
-                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                            <!-- <div class="form-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Upload image</label>
-                                </div>
-                            </div>
-                            <div class="py-4"></div> -->
-                            <div class="card-body">
-                                <h5 class="card-title">Search user by genre</h5>
-                                <ul class="nav nav-pills flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Jazz') ?>">Jazz</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Instrumental') ?>">Instrumental</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Techno') ?>">Techno</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Disco') ?>">Disco</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Rock') ?>">Rock</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-
-                </div>
-            </div>
+            
             <!-- Post /////-->
 
             <!--- \\\\\\\Post-->
@@ -309,13 +226,10 @@
                     <hr />
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToUserProfilePage/' . $userId) ?>">Your Profile</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFollowersPage') ?>"><?php echo $followerCount ?> Followers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFollowingPage') ?>"><?php echo $followingCount ?> Following </a>
+                            <a class="nav-link" href="#"><?php echo $followingCount ?> Following</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Friends</a>

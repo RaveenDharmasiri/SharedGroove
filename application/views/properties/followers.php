@@ -13,29 +13,29 @@
 
 <nav class="navbar navbar-light bg-white">
   <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
-</nav>
 
+</nav>
 <div class="container">
   <div class="top">
-    <h2>Search Results for '<?php echo $genreType ?>'</h2>
+    <h2><?php echo sizeof($userFollowers) ?> Followers</h2>
+
   </div>
+
+
   <div class="row">
-
     <div class="shadow">
-
       <?php
-
-      for ($x = 0; $x < sizeof($searchResult); $x++) {
+      for ($x = 0; $x < sizeof($userFollowers); $x++) {
         ?>
         <div class="col-sm-12">
           <div class="col-sm-2">
-            <img src="<?php echo base_url($searchResult[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
+            <img src="<?php echo base_url($userFollowers[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
           </div>
           <div class="col-sm-8">
-            <h4><a class="search-result-username" href="#"><?php echo $searchResult[$x]['firstName'] . " " . $searchResult[$x]['lastName'] ?></a></h4>
+            <h4><a class="search-result-username" href="#"><?php echo $userFollowers[$x]['firstName'] . " " . $userFollowers[$x]['lastName'] ?></a></h4>
           </div>
           <?php
-            if (!$searchResult[$x]['isFollowing']) {
+            if (!$userFollowers[$x]['isFollowing']) {
               ?>
             <div class="col-sm-follow">
               <a class="btn-follow" href="#">Follow</a>

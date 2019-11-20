@@ -21,8 +21,8 @@ class HomeManagementController extends CI_Controller
         if ($currentUserEmail == null) {
             $this->load->view('properties/login');
         } else {
-            $this->load->model('FollowerPageService/FollowerData');
-            $userFollowers = $this->FollowerData->getUserFollowers();
+            $this->load->model('FollowerPageService/GetFollowers');
+            $userFollowers = $this->FollowerData->getUserFollowersEmails();
             $returnArray = array(
                 'userFollowers' => $userFollowers
             );
@@ -38,7 +38,12 @@ class HomeManagementController extends CI_Controller
             $this->load->view('properties/login');
         } else {
             $this->load->model('FollowingPageService/GetFollowingUsers');
-            $this->FollowingData->getFollowingUserData();
+            $followingUserResults = $this->GetFollowingUsers->getFollowingUserData();
+            $returnArray = array(
+                'followingUserResults'=>$followingUserResults,
+            );
+            $this->load->view('properties/following', $returnArray);
+            var_dump($returnArray);
         }
     }
 

@@ -12,7 +12,7 @@ class UserManagementController extends CI_Controller
         //     $this->sendingToHomePage();
         // }
 
-        $this->load->view('properties/searchResult');
+        $this->load->view('properties/login');
     }
 
     public function insertUser()

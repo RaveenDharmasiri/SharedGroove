@@ -12,44 +12,36 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/searchResult.css'); ?>" />
 
 <nav class="navbar navbar-light bg-white">
-  <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
+    <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
 
 </nav>
 <div class="container">
-  <div class="top">
-    <h2><?php echo sizeof($userFollowers) ?> Followers</h2>
+    <div class="top">
+        <h2><?php echo sizeof($followingUserResults) ?> Following</h2>
 
-  </div>
-
-
-  <div class="row">
-    <div class="shadow">
-      <?php
-      for ($x = 0; $x < sizeof($userFollowers); $x++) {
-        ?>
-        <div class="col-sm-12">
-          <div class="col-sm-2">
-            <img src="<?php echo base_url($userFollowers[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
-          </div>
-          <div class="col-sm-8">
-            <h4><a class="search-result-username" href="#"><?php echo $userFollowers[$x]['firstName'] . " " . $userFollowers[$x]['lastName'] ?></a></h4>
-            <input type="text" name="userId" value= <?php echo $userFollowers[$x]['userId']; ?> hidden>
-          </div>
-          <?php
-            if (!$userFollowers[$x]['isFollowing']) {
-              ?>
-            <div class="col-sm-follow">
-              <a class="btn-follow" href="#">Follow</a>
-            </div>
-          <?php } else { ?>
-            <div class="col-sm-follow">
-              <a class="btn-follow" href="#">Followed</a>
-            </div>
-          <?php } ?>
-        </div>
-        <div class="clearfix"></div>
-        <hr />
-      <?php } ?>
     </div>
-  </div>
+
+
+    <div class="row">
+        <div class="shadow">
+            <?php
+            for ($x = 0; $x < sizeof($followingUserResults); $x++) {
+                ?>
+                <div class="col-sm-12">
+                    <div class="col-sm-2">
+                        <img src="<?php echo base_url($followingUserResults[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
+                    </div>
+                    <div class="col-sm-8">
+                        <h4><a class="search-result-username" href="#"><?php echo $followingUserResults[$x]['firstName'] . " " . $followingUserResults[$x]['lastName'] ?></a></h4>
+                        <input type="text" name="userId" value= <?php echo $followingUserResults[$x]['userId']; ?> hidden>
+                    </div>
+                    <div class="col-sm-follow">
+                        <a class="btn-follow" href="#">Following</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <hr />
+            <?php } ?>
+        </div>
+    </div>
 </div>

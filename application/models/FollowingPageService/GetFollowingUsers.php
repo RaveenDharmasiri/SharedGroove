@@ -13,14 +13,56 @@ class GetFollowingUsers extends CI_Model {
         $this->db->where('mainUser', $this->session->userdata('email'));
         $query = $this->db->get();
 
-        var_dump($query->result());
-
-        $this->getTheEmailsOfTheFollowingUser($query->result());
+        return $this->getTheEmailsOfTheFollowingUser($query->result());
     }
 
-    public function getTheEmailsOfTheFollowingUser($followingUserObjects) {
+    private function getTheEmailsOfTheFollowingUser($followingUserObjects) {
         $followingUserEmails = array();
 
-        
+        foreach($followingUserObjects as $followingUser) {
+            array_push($followingUserEmails, $followingUser->followingUser);
+        }
+
+        return $this->getFollowingUserDetails($followingUserEmails);
+    }
+
+    private function getFollowingUserDetails($followingUserEmails) {
+        $followingUserObjectArray = array();
+        for($x=0; $x<sizeof($followingUserEmails); $x++) {
+            $this->db->select('*');
+            $this->db->from('User');
+            $this->db->where('email', $followingUserEmails[$x]);
+            $query = $this->db->get();
+
+            $followingUser = new FollowingUser();
+
+            $followingUser->setUserId($query->row_array()['userId']);
+            $followingUser->setFirstName($query->row_array()['firstName']);
+            $followingUser->setLastName($query->row_array()['lastName']);
+            $followingUser->setProfilePicture($query->row_array()['profilePicture']);
+            $followingUser->setEmail($query->row_array()['email']);
+
+            array_push($followingUserObjectArray, $followingUser);
+        }
+
+        return $this->configReturnObject($followingUserObjectArray);
+    }
+
+    private function configReturnObject($followingUserObjectArray) {
+
+        $returnObject = array();
+        foreach($followingUserObjectArray as $followingUser) {
+            $followingUserDetails = array(
+                'userId'=>$followingUser->getUserId(),
+                'firstName'=>$followingUser->getFirstName(),
+                'lastName'=>$followingUser->getLastName(),
+                'email'=>$followingUser->getEmail(),
+                'profilePicture'=>$followingUser->getProfilePicture(),
+            );
+
+            array_push($returnObject, $followingUserDetails);
+        }
+
+        return $returnObject;
     }
 }

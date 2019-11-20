@@ -229,7 +229,7 @@
                             <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFollowersPage') ?>"><?php echo $followerCount ?> Followers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><?php echo $followingCount ?> Following</a>
+                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFollowingPage') ?>"><?php echo $followingCount ?> Following</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Friends</a>

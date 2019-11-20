@@ -1,16 +1,11 @@
 <?php
 include('Follower.php');
-class FollowerData extends CI_Model
+class GetFollowers extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
-    }
-
-    public function getUserFollowers()
-    {
-        return $this->getUserFollowersEmails();
     }
 
     public function getUserFollowersEmails()
@@ -26,10 +21,10 @@ class FollowerData extends CI_Model
             array_push($userFollowersEmailsArray, $follower->mainUser);
         }
 
-        return $this->getFollowersDetails($userFollowersEmailsArray);
+        return $this->getUserFollowersDetails($userFollowersEmailsArray);
     }
 
-    public function getFollowersDetails($userFollowersEmailsArray)
+    public function getUserFollowersDetails($userFollowersEmailsArray)
     {
         $followersArray = array();
         for ($x = 0; $x < sizeof($userFollowersEmailsArray); $x++) {

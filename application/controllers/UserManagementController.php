@@ -4,7 +4,15 @@ class UserManagementController extends CI_Controller
 {
     public function index()
     {
-        $this->load->view('properties/home');
+
+        // $currentUserEmail = $this->session->userdata('email');
+        // if($currentUserEmail == null) {
+        //     $this->load->view('properties/login');
+        // } else {
+        //     $this->sendingToHomePage();
+        // }
+
+        $this->load->view('properties/searchResult');
     }
 
     public function insertUser()
@@ -42,16 +50,29 @@ class UserManagementController extends CI_Controller
         $userDetailsArray = $this->Login->getUserDetails($email, $password);
 
         if ($emailInstanceCount > 0) {
-            $this->session->set_userdata('firstName', $userDetailsArray['firstName']);
-            $this->session->set_userdata('lastName', $userDetailsArray['lastName']);
-            $this->session->set_userdata('profilePicture', $userDetailsArray['profilePicture']);
+            // $this->session->set_userdata('firstName', $userDetailsArray['firstName']);
+            // $this->session->set_userdata('lastName', $userDetailsArray['lastName']);
+            // $this->session->set_userdata('profilePicture', $userDetailsArray['profilePicture']);
             $this->session->set_userdata('email', $email);
-            $this->load->view('properties/home');
+            $this->sendingToHomePage();
         } else {
             $viewReturnData = array(
                 'errorMessage' => 'Email or Password you entered are not correct',
             );
             $this->load->view('properties/login', $viewReturnData);
+        }
+    }
+
+    public function sendingToHomePage()
+    {
+        $currentUserEmail = $this->session->userdata('email');
+        if ($currentUserEmail == null) {
+            $this->load->view('properties/login');
+        } else {
+            $this->load->model('HomePageService/HomeData');
+            $homePageData = $this->HomeData->getHomeInformation();
+            $this->load->view('properties/Home', $homePageData);
+            var_dump($homePageData);
         }
     }
 
@@ -78,9 +99,9 @@ class UserManagementController extends CI_Controller
             $error = array('error' => $this->upload->display_errors());
             $returnArray = array(
                 'error' => $error['error'],
-                'firstName'=>$firstName,
-                'lastName'=>$lastName,
-                'email'=>$email
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'email' => $email
             );
             $this->load->view('properties/editProfile', $returnArray);
             return false;

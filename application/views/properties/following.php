@@ -32,8 +32,7 @@
                         <img src="<?php echo base_url($followingUserResults[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
                     </div>
                     <div class="col-sm-8">
-                        <h4><a class="search-result-username" href="#"><?php echo $followingUserResults[$x]['firstName'] . " " . $followingUserResults[$x]['lastName'] ?></a></h4>
-                        <input type="text" name="userId" value= <?php echo $followingUserResults[$x]['userId']; ?> hidden>
+                        <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/'.$followingUserResults[$x]['userId']) ?>"><?php echo $followingUserResults[$x]['firstName'] . " " . $followingUserResults[$x]['lastName'] ?></a></h4>
                     </div>
                     <div class="col-sm-follow">
                         <a class="btn-follow" href="#">Following</a>

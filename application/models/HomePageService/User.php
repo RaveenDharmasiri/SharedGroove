@@ -7,13 +7,16 @@ class User
     private $profilePicture;
     private $followerCount = 0;
     private $followingCount = 0;
+    private $friendCount = 0;
     private $userGenres = array();
 
-    public function setUserId($userId) {
+    public function setUserId($userId)
+    {
         $this->userId = $userId;
     }
 
-    public function getUserId() {
+    public function getUserId()
+    {
         return $this->userId;
     }
 
@@ -48,27 +51,42 @@ class User
     }
 
     public function setFollowerCount($followerCount)
-    { 
+    {
         $this->followerCount = $followerCount;
     }
 
-    public function getFollowerCount() {
+    public function getFollowerCount()
+    {
         return $this->followerCount;
     }
 
-    public function setFollowingCount($followingCount) {
+    public function setFollowingCount($followingCount)
+    {
         $this->followingCount = $followingCount;
     }
 
-    public function getFollowingCount() {
+    public function getFollowingCount()
+    {
         return $this->followingCount;
     }
 
-    public function setUserGenres($userGenres) {
+    public function setFriendCount($friendCount)
+    {
+        $this->friendCount = $friendCount;
+    }
+
+    public function getFriendCount()
+    {
+        return $this->friendCount;
+    }
+
+    public function setUserGenres($userGenres)
+    {
         $this->userGenres = $userGenres;
     }
 
-    public function getUserGenres() {
+    public function getUserGenres()
+    {
         return $this->userGenres;
     }
 }

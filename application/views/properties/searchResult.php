@@ -32,7 +32,7 @@
             <img src="<?php echo base_url($searchResult[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
           </div>
           <div class="col-sm-8">
-            <h4><a class="search-result-username" href="#"><?php echo $searchResult[$x]['firstName'] . " " . $searchResult[$x]['lastName'] ?></a></h4>
+            <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/'.$searchResult[$x]['userId']) ?>"><?php echo $searchResult[$x]['firstName'] . " " . $searchResult[$x]['lastName'] ?></a></h4>
           </div>
           <?php
             if (!$searchResult[$x]['isFollowing']) {

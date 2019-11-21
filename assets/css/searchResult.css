@@ -29,13 +29,18 @@ a {
 
 a:hover {
     text-decoration: none;
-    color: white;
+    color: #ffffff69;
 }
 
 .search-result-username {
     margin-top: 2px;
     float: left;
 }
+
+
+/* .search-result-username:hover {
+    color: #ffffff69;
+} */
 
 .col-sm-12 {
     padding-right: 37px;

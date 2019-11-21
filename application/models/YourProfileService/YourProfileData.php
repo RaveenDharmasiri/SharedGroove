@@ -1,6 +1,6 @@
 <?php
 include('User.php');
-class UserProfileData extends CI_Model
+class YourProfileData extends CI_Model
 {
     public function __construct()
     {
@@ -8,17 +8,16 @@ class UserProfileData extends CI_Model
         $this->load->database();
     }
 
-    public function getUserProfileData($userId)
+    public function getUserProfileData()
     {
-        return $this->getUserDetails($userId);
-
+        return $this->getUserDetails();
     }
 
-    public function getUserDetails($userId)
+    public function getUserDetails()
     {
         $this->db->select('*');
         $this->db->from('User');
-        $this->db->where('userId', $userId);
+        $this->db->where('email', $this->session->userdata('email'));
         $query = $this->db->get();
 
         $user = new User();
@@ -31,7 +30,7 @@ class UserProfileData extends CI_Model
         return $this->getUserFollowerCount($user);
     }
 
-    public function getUserFollowerCount($user)
+    private function getUserFollowerCount($user)
     {
         $this->db->select('*');
         $this->db->from('UserFollowing');
@@ -69,23 +68,6 @@ class UserProfileData extends CI_Model
 
         $user->setUserGenres($userGenres);
 
-        return $this->isMainUserFollowing($user);
-    }
-
-    public function isMainUserFollowing($user) {
-        $this->db->select('*');
-        $this->db->from('UserFollowing');
-        $condition = array(
-            'mainUser'=>$this->session->userdata('email'),
-            'followingUser'=>$user->getEmail(),
-        );
-        $this->db->where($condition);
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            $user->setIsFollowing(true);
-        }
-
         return $this->getFollowersEmails($user);
     }
 
@@ -105,7 +87,7 @@ class UserProfileData extends CI_Model
         return $this->getFollowingEmails($user, $followerEmails);
     }
 
-    public function getFollowingEmails($user, $followerEmails)
+    private function getFollowingEmails($user, $followerEmails)
     {
         $followingEmails = array();
         $this->db->select('followingUser');
@@ -120,7 +102,7 @@ class UserProfileData extends CI_Model
         return $this->getTheFriends($user, $followerEmails, $followingEmails);
     }
 
-    public function getTheFriends($user, $followerEmails, $followingEmails)
+    private function getTheFriends($user, $followerEmails, $followingEmails)
     {
         $friendsEmails = array();
         for ($x = 0; $x < sizeof($followerEmails); $x++) {
@@ -149,10 +131,8 @@ class UserProfileData extends CI_Model
             'followingCount' => $user->getFollowingCount(),
             'userGenres' => $user->getUserGenres(),
             'friendsCount'=>$user->getFriendCount(),
-            'isFollowing'=>$user->getIsFollowing(),
         );
 
         return $returnArray;
-        // var_dump($returnArray);
     }
 }

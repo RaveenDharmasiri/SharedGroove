@@ -1,20 +1,6 @@
 <?php
-class HomeManagementController extends CI_Controller
+class YourProfileController extends CI_Controller
 {
-
-    public function sendingToYourProfilePage()
-    {
-        $currentUserEmail = $this->session->userdata('email');
-        if ($currentUserEmail == null) {
-            $this->load->view('properties/login');
-        } else {
-            $this->load->model('YourProfileService/YourProfileData');
-            $userProfileData = $this->YourProfileData->getUserProfileData();
-            $this->load->view('properties/yourProfile', $userProfileData);
-            var_dump($userProfileData);
-        }
-    }
-
     public function sendingToFollowersPage()
     {
         $currentUserEmail = $this->session->userdata('email');
@@ -56,22 +42,10 @@ class HomeManagementController extends CI_Controller
             $this->load->model('FriendsPageService/GetFriends');
             $friendsResult = $this->GetFriends->getFollowersEmails();
             $returnArray = array(
-                'friendsResult'=>$friendsResult,
+                'friendsResult' => $friendsResult,
             );
             $this->load->view('properties/friends', $returnArray);
             var_dump($returnArray);
         }
     }
-
-    // public function postMessage()
-    // {
-    //     $currentUserEmail = $this->session->userdata('email');
-    //     if ($currentUserEmail == null) {
-    //         $this->load->view('properties/login');
-    //     } else {
-    //         $postMessage = $this->input->post('userPost');
-    //         $this->load->model('PostService/AddPost');
-    //         $this->AddPost->postMessage($postMessage);
-    //     }
-    // }
 }

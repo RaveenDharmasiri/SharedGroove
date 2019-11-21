@@ -13,7 +13,7 @@
 
 <nav class="navbar navbar-light bg-white">
     <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
-    
+
 </nav>
 
 
@@ -23,15 +23,22 @@
             <div class="card">
 
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-auto mb-3">
+                            <div class="mx-auto" style="width: 140px;">
+                                <img src="<?php echo base_url($profilePicture); ?>" id="profileDisplay" width="160px">
+                            </div>
+                        </div>
+                    </div>
                     <div class="h7 full-name"><?php echo $firstName . " " . $lastName ?></div>
                     <div class="h5">My favourite genres</div>
                     <div class="h7 genre-list">
                         <?php
-                            for($x=0; $x<sizeof($userGenres)-1; $x++) {
-                                echo $userGenres[$x].", ";
-                            }
+                        for ($x = 0; $x < sizeof($userGenres) - 1; $x++) {
+                            echo $userGenres[$x] . ", ";
+                        }
 
-                            echo $userGenres[sizeof($userGenres)-1];
+                        echo $userGenres[sizeof($userGenres) - 1];
                         ?>
                     </div>
                 </div>
@@ -45,13 +52,17 @@
                         <div class="h6 following-title">Following</div>
                         <div class="h5 following-count"><?php echo $followingCount ?></div>
                     </li>
+                    <li class="list-group-item">
+                        <div class="h6 following-title">Friends</div>
+                        <div class="h5 following-count"><?php echo $friendsCount ?></div>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="col-md-6 gedf-main">
 
             <!--- \\\\\\\Post-->
-            
+
             <!-- Post /////-->
 
             <!--- \\\\\\\Post-->
@@ -67,24 +78,11 @@
                                 <div class="h7 text-muted">Miracles Lee Cross</div>
                             </div>
                         </div>
-                        <div>
-                            <div class="dropdown">
-                                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-h"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                    <div class="h6 dropdown-header">Configuration</div>
-                                    <a class="dropdown-item" href="#">Save</a>
-                                    <a class="dropdown-item" href="#">Hide</a>
-                                    <a class="dropdown-item" href="#">Report</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
                 <div class="card-body">
-                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div>
                     <a class="card-link" href="#">
                         <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
                     </a>
@@ -226,13 +224,13 @@
                     <hr />
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFollowersPage') ?>"><?php echo $followerCount ?> Followers</a>
+                            <a class="nav-link" href="<?php echo site_url('YourProfileController/sendingToFollowersPage') ?>"><?php echo $followerCount ?> Followers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFollowingPage') ?>"><?php echo $followingCount ?> Following</a>
+                            <a class="nav-link" href="<?php echo site_url('YourProfileController/sendingToFollowingPage') ?>"><?php echo $followingCount ?> Following</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Friends</a>
+                            <a class="nav-link" href="<?php echo site_url('YourProfileController/sendingToFriendsPage') ?>"><?php echo $friendsCount ?> Friends</a>
                         </li>
                     </ul>
                 </div>

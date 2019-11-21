@@ -13,16 +13,7 @@
 
 <nav class="navbar navbar-light bg-white">
     <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
-    <!-- <form class="form-inline" action="/SharedGroove/index.php/FriendSearchController/findUser">
-        <div class="input-group">
-            <input type="text" class="form-control" name="searchValue" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" id="button-addon2">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form> -->
+
 </nav>
 
 
@@ -40,7 +31,7 @@
                         </div>
                     </div>
                     <div class="h7 full-name"><?php echo $firstName . " " . $lastName ?></div>
-                    <div class="h5">My favourite genres</div>
+                    <div class="h5"><?php echo $firstName ?>'s favourite genres</div>
                     <div class="h7 genre-list">
                         <?php
                         for ($x = 0; $x < sizeof($userGenres) - 1; $x++) {
@@ -65,76 +56,22 @@
                         <div class="h6 following-title">Friends</div>
                         <div class="h5 following-count"><?php echo $friendsCount ?></div>
                     </li>
+                    <li class="list-group-item">
+                        <form>
+                            <?php if (!$isFollowing) { ?>
+                                <div class="h6 following-title"><button type="button" class="btn btn-primary btn-lg btn-block">Follow</button></div>
+                            <?php } else { ?>
+                                <button type="button" class="btn btn-secondary btn-lg btn-block">Followed</button>
+                            <?php } ?>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="col-md-6 gedf-main">
 
             <!--- \\\\\\\Post-->
-            <div class="card publication-card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Make
-                                a publication</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Genre Search</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-                            <form action="<?php echo base_url('/index.php/HomeManagementController/postMessage') ?>" method="POST">
-                                <div class="form-group">
-                                    <label class="sr-only" for="message">post</label>
-                                    <textarea class="form-control" id="userPost" name="userPost" rows="3" placeholder="What are you thinking?"></textarea>
-                                </div>
 
-                                <div class="btn-toolbar justify-content-between">
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn btn-primary">Share</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                            <!-- <div class="form-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Upload image</label>
-                                </div>
-                            </div>
-                            <div class="py-4"></div> -->
-                            <div class="card-body">
-                                <h5 class="card-title">Search user by genre</h5>
-                                <ul class="nav nav-pills flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Jazz') ?>">Jazz</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Instrumental') ?>">Instrumental</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Techno') ?>">Techno</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Disco') ?>">Disco</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url('GenreSearchController/findSearchResults/Rock') ?>">Rock</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-
-                </div>
-            </div>
             <!-- Post /////-->
 
             <!--- \\\\\\\Post-->
@@ -309,16 +246,13 @@
                     <hr />
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToYourProfilePage/') ?>">Your Profile</a>
+                            <a class="nav-link" href="#"><?php echo $followerCount ?> Followers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFollowersPage') ?>"><?php echo $followerCount ?> Followers</a>
+                            <a class="nav-link" href="#"><?php echo $followingCount ?> Following</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFollowingPage') ?>"><?php echo $followingCount ?> Following </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('HomeManagementController/sendingToFriendsPage') ?>"><?php echo $friendsCount ?> Friends</a>
+                            <a class="nav-link" href="#"><?php echo $friendsCount ?> Friends</a>
                         </li>
                     </ul>
                 </div>

@@ -69,8 +69,56 @@ class HomeData extends CI_Model
 
         $user->setUserGenres($userGenres);
 
+        return $this->getFollowersEmails($user);
+    }
+
+    //Friends Count - Start
+    public function getFollowersEmails($user)
+    {
+        $followerEmails = array();
+        $this->db->select('mainUser');
+        $this->db->from('UserFollowing');
+        $this->db->where('followingUser', $this->session->userdata('email'));
+        $query = $this->db->get();
+
+        foreach ($query->result() as $follower) {
+            array_push($followerEmails, $follower->mainUser);
+        }
+
+        return $this->getFollowingEmails($user, $followerEmails);
+    }
+
+    private function getFollowingEmails($user, $followerEmails)
+    {
+        $followingEmails = array();
+        $this->db->select('followingUser');
+        $this->db->from('UserFollowing');
+        $this->db->where('mainUser', $this->session->userdata('email'));
+        $query = $this->db->get();
+
+        foreach ($query->result() as $following) {
+            array_push($followingEmails, $following->followingUser);
+        }
+
+        return $this->getTheFriends($user, $followerEmails, $followingEmails);
+    }
+
+    private function getTheFriends($user, $followerEmails, $followingEmails)
+    {
+        $friendsEmails = array();
+        for ($x = 0; $x < sizeof($followerEmails); $x++) {
+            for ($y = 0; $y < sizeof($followingEmails); $y++) {
+                if ($followerEmails[$x] == $followingEmails[$y]) {
+                    array_push($friendsEmails, $followingEmails[$y]);
+                }
+            }
+        }
+
+        $user->setFriendCount(sizeof($friendsEmails));
+
         return $this->configReturnObject($user);
     }
+    //End
 
     public function configReturnObject($user)
     {
@@ -82,6 +130,7 @@ class HomeData extends CI_Model
             'followerCount' => $user->getFollowerCount(),
             'followingCount' => $user->getFollowingCount(),
             'userGenres' => $user->getUserGenres(),
+            'friendsCount'=>$user->getFriendCount(),
         );
 
         return $returnArray;

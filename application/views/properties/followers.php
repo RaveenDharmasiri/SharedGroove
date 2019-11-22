@@ -11,6 +11,10 @@
 
 <link rel="stylesheet" href="<?php echo base_url('assets/css/searchResult.css'); ?>" />
 
+<?php
+  $pageName = "followers";
+?>
+
 <nav class="navbar navbar-light bg-white">
   <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
 
@@ -38,7 +42,7 @@
             if (!$userFollowers[$x]['isFollowing']) {
               ?>
             <div class="col-sm-follow">
-              <a class="btn-follow" href="#">Follow</a>
+              <a class="btn-follow" href="<?php echo site_url('FollowersManagementController/followUser/'.$userFollowers[$x]['userId']) ?>">Follow</a>
             </div>
           <?php } else { ?>
             <div class="col-sm-follow">

@@ -85,6 +85,7 @@ class UserManagementController extends CI_Controller
         $imageWasUploadedToDB = $this->uploadImageToFolder($firstName, $lastName, $email);
         if ($imageWasUploadedToDB) {
             $this->uploadUserGenres($genres, $email);
+            $this->load->view('properties/login');
         }
     }
 

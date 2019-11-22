@@ -11,6 +11,9 @@
 
 <link rel="stylesheet" href="<?php echo base_url('assets/css/searchResult.css'); ?>" />
 
+<?php
+$pageName = 'searchResult';
+?>
 <nav class="navbar navbar-light bg-white">
   <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
 </nav>
@@ -32,13 +35,13 @@
             <img src="<?php echo base_url($searchResult[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
           </div>
           <div class="col-sm-8">
-            <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/'.$searchResult[$x]['userId']) ?>"><?php echo $searchResult[$x]['firstName'] . " " . $searchResult[$x]['lastName'] ?></a></h4>
+            <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/' . $searchResult[$x]['userId']) ?>"><?php echo $searchResult[$x]['firstName'] . " " . $searchResult[$x]['lastName'] ?></a></h4>
           </div>
           <?php
             if (!$searchResult[$x]['isFollowing']) {
               ?>
             <div class="col-sm-follow">
-              <a class="btn-follow" href="#">Follow</a>
+              <a class="btn-follow" href="<?php echo site_url('GenreSearchController/followGenreResultUser/' . $searchResult[$x]['userId'] . '/' . $genreType) ?>">Follow</a>
             </div>
           <?php } else { ?>
             <div class="col-sm-follow">

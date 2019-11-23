@@ -13,9 +13,7 @@
 
 <nav class="navbar navbar-light bg-white">
     <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
-
 </nav>
-
 
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -37,7 +35,6 @@
                         for ($x = 0; $x < sizeof($userGenres) - 1; $x++) {
                             echo $userGenres[$x] . ", ";
                         }
-
                         echo $userGenres[sizeof($userGenres) - 1];
                         ?>
                     </div>
@@ -59,9 +56,11 @@
                     <li class="list-group-item">
                         <form>
                             <?php if (!$isFollowing) { ?>
-                                <div class="h6 following-title"><button type="button" class="btn btn-primary btn-lg btn-block">Follow</button></div>
-                            <?php } else { ?>
-                                <button type="button" class="btn btn-secondary btn-lg btn-block">Followed</button>
+                                <div class="h6 following-title"><a href="<?php echo site_url('UserProfileController/followUser/' . $userId) ?>"><button type="button" class="btn btn-primary btn-lg btn-block">Follow</button></a></div>
+                            <?php } else if ($isFollowing && $isFriend) { ?>
+                                <button type="button" class="btn btn-secondary btn-lg btn-block">Friends</button>
+                            <?php } else if ($isFollowing) { ?>
+                                <button type="button" class="btn btn-secondary btn-lg btn-block">Following</button>
                             <?php } ?>
                         </form>
                     </li>
@@ -101,7 +100,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="card-body">
                     <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
@@ -121,7 +119,6 @@
                 </div>
             </div>
             <!-- Post /////-->
-
 
             <!--- \\\\\\\Post-->
             <div class="card gedf-card">
@@ -183,7 +180,6 @@
             </div>
             <!-- Post /////-->
 
-
             <!--- \\\\\\\Post-->
             <div class="card gedf-card">
                 <div class="card-header">
@@ -242,17 +238,10 @@
             <div class="card gedf-card">
                 <div class="card-body">
                     <h5 class="card-title">Quick Access</h5>
-                    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                     <hr />
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><?php echo $followerCount ?> Followers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><?php echo $followingCount ?> Following</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><?php echo $friendsCount ?> Friends</a>
+                            <a class="nav-link" href="<?php echo site_url('UserProfileController/sendToYourProfile') ?>"> Your Profile</a>
                         </li>
                     </ul>
                 </div>

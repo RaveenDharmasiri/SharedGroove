@@ -45,6 +45,24 @@ class GetFollowingUsers extends CI_Model {
             array_push($followingUserObjectArray, $followingUser);
         }
 
+        return $this->checkIfFriends($followingUserObjectArray);
+    }
+
+    private function checkIfFriends($followingUserObjectArray) {
+        foreach($followingUserObjectArray as $followingUser){
+            $this->db->select('mainUser');
+            $this->db->from('UserFollowing');
+            $conditionArray = array(
+                'mainUser'=>$followingUser->getEmail(),
+                'followingUser'=>$this->session->userdata('email'),
+            );
+            $this->db->where($conditionArray);
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $followingUser->setIsFriend(true);
+            }
+        }
+
         return $this->configReturnObject($followingUserObjectArray);
     }
 
@@ -58,6 +76,7 @@ class GetFollowingUsers extends CI_Model {
                 'lastName'=>$followingUser->getLastName(),
                 'email'=>$followingUser->getEmail(),
                 'profilePicture'=>$followingUser->getProfilePicture(),
+                'isFriend'=>$followingUser->getIsFriend(),
             );
 
             array_push($returnObject, $followingUserDetails);

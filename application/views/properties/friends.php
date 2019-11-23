@@ -18,10 +18,7 @@
 <div class="container">
     <div class="top">
         <h2><?php echo sizeof($friendsResult) ?> Following</h2>
-
     </div>
-
-
     <div class="row">
         <div class="shadow">
             <?php
@@ -35,7 +32,7 @@
                         <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/'.$friendsResult[$x]['userId']) ?>"><?php echo $friendsResult[$x]['firstName'] . " " . $friendsResult[$x]['lastName'] ?></a></h4>
                     </div>
                     <div class="col-sm-follow">
-                        <a class="btn-follow" href="#">Following</a>
+                        <a class="btn-follow" href="#">Friends</a>
                     </div>
                 </div>
                 <div class="clearfix"></div>

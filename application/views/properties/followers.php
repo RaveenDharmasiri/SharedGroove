@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/searchResult.css'); ?>" />
 
 <?php
-  $pageName = "followers";
+$pageName = "followers";
 ?>
 
 <nav class="navbar navbar-light bg-white">
@@ -22,10 +22,7 @@
 <div class="container">
   <div class="top">
     <h2><?php echo sizeof($userFollowers) ?> Followers</h2>
-
   </div>
-
-
   <div class="row">
     <div class="shadow">
       <?php
@@ -36,17 +33,17 @@
             <img src="<?php echo base_url($userFollowers[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
           </div>
           <div class="col-sm-8">
-            <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/'.$userFollowers[$x]['userId']) ?>"><?php echo $userFollowers[$x]['firstName'] . " " . $userFollowers[$x]['lastName'] ?></a></h4>
+            <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/' . $userFollowers[$x]['userId']) ?>"><?php echo $userFollowers[$x]['firstName'] . " " . $userFollowers[$x]['lastName'] ?></a></h4>
           </div>
           <?php
             if (!$userFollowers[$x]['isFollowing']) {
               ?>
             <div class="col-sm-follow">
-              <a class="btn-follow" href="<?php echo site_url('FollowersManagementController/followUser/'.$userFollowers[$x]['userId']) ?>">Follow</a>
+              <a class="btn-follow" href="<?php echo site_url('FollowersManagementController/followUser/' . $userFollowers[$x]['userId']) ?>">Follow</a>
             </div>
           <?php } else { ?>
             <div class="col-sm-follow">
-              <a class="btn-follow" href="#">Followed</a>
+              <a class="btn-follow" href="#">Friends</a>
             </div>
           <?php } ?>
         </div>

@@ -11,6 +11,7 @@ class User
     private $friendCount = 0;
     private $userGenres = array();
     private $isFollowing = false;
+    private $isFriend = false;
 
     public function setUserId($userId)
     {
@@ -108,5 +109,13 @@ class User
 
     public function getIsFollowing() {
         return $this->isFollowing;
+    }
+
+    public function setIsFriend($isFriend) {
+        $this->isFriend = $isFriend;
+    }
+
+    public function getIsFriend() {
+        return $this->isFriend;
     }
 }

@@ -23,11 +23,8 @@ $pageName = 'searchResult';
     <h2>Search Results for '<?php echo $genreType ?>'</h2>
   </div>
   <div class="row">
-
     <div class="shadow">
-
       <?php
-
       for ($x = 0; $x < sizeof($searchResult); $x++) {
         ?>
         <div class="col-sm-12">

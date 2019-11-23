@@ -133,9 +133,37 @@ class UserProfileData extends CI_Model
 
         $user->setFriendCount(sizeof($friendsEmails));
 
-        return $this->configReturnObject($user);
+        return $this->checkIfTheUserIsAFriend($user, $friendsEmails);
     }
     //End
+
+    public function checkIfTheUserIsAFriend($user) {
+        $this->db->select('followingUser');
+        $this->db->from('UserFollowing');
+        $conditionArray = array (
+            'mainUser'=>$this->session->userdata('email'),
+            'followingUser'=>$user->getEmail(),
+        );
+        $this->db->where($conditionArray);
+        $query = $this->db->get();
+        $isFollowing = $query->num_rows();
+
+        $this->db->select('mainUser');
+        $this->db->from('UserFollowing');
+        $conditionArray = array (
+            'mainUser'=>$user->getEmail(),
+            'followingUser'=>$this->session->userdata('email'),
+        );
+        $this->db->where($conditionArray);
+        $query = $this->db->get();
+        $isAFollower = $query->num_rows();
+
+        if ($isFollowing > 0 && $isAFollower > 0) {
+            $user->setIsFriend(true);
+        }
+
+        return $this->configReturnObject($user);
+    }
 
     public function configReturnObject($user)
     {
@@ -150,9 +178,9 @@ class UserProfileData extends CI_Model
             'userGenres' => $user->getUserGenres(),
             'friendsCount'=>$user->getFriendCount(),
             'isFollowing'=>$user->getIsFollowing(),
+            'isFriend'=>$user->getIsFriend(),
         );
 
         return $returnArray;
-        // var_dump($returnArray);
     }
 }

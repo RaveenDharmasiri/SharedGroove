@@ -18,10 +18,7 @@
 <div class="container">
     <div class="top">
         <h2><?php echo sizeof($followingUserResults) ?> Following</h2>
-
     </div>
-
-
     <div class="row">
         <div class="shadow">
             <?php
@@ -32,11 +29,17 @@
                         <img src="<?php echo base_url($followingUserResults[$x]['profilePicture']); ?>" class="img-circle" width="60px" height="60px">
                     </div>
                     <div class="col-sm-8">
-                        <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/'.$followingUserResults[$x]['userId']) ?>"><?php echo $followingUserResults[$x]['firstName'] . " " . $followingUserResults[$x]['lastName'] ?></a></h4>
+                        <h4><a class="search-result-username" href="<?php echo site_url('FollowersManagementController/sendingToFollowerProfilePage/' . $followingUserResults[$x]['userId']) ?>"><?php echo $followingUserResults[$x]['firstName'] . " " . $followingUserResults[$x]['lastName'] ?></a></h4>
                     </div>
-                    <div class="col-sm-follow">
-                        <a class="btn-follow" href="#">Following</a>
-                    </div>
+                    <?php if ($followingUserResults[$x]['isFriend']) { ?>
+                        <div class="col-sm-follow">
+                            <a class="btn-follow" href="#">Friends</a>
+                        </div>
+                    <?php } else { ?>
+                        <div class="col-sm-follow">
+                            <a class="btn-follow" href="#">Following</a>
+                        </div>
+                    <?php } ?>
                 </div>
                 <div class="clearfix"></div>
                 <hr />

@@ -5,6 +5,7 @@ class FollowingUser {
     private $lastName;
     private $email;
     private $profilePicture;
+    private $isFriend = false;
 
     public function setUserId($userId) {
         $this->userId = $userId;
@@ -44,5 +45,13 @@ class FollowingUser {
 
     public function getProfilePicture() {
         return $this->profilePicture;
+    }
+
+    public function setIsFriend($isFriend) {
+        $this->isFriend = $isFriend;
+    }
+
+    public function getIsFriend() {
+        return $this->isFriend;
     }
 }

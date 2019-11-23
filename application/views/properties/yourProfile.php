@@ -13,9 +13,7 @@
 
 <nav class="navbar navbar-light bg-white">
     <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
-
 </nav>
-
 
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -220,7 +218,6 @@
             <div class="card gedf-card">
                 <div class="card-body">
                     <h5 class="card-title">Quick Access</h5>
-                    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                     <hr />
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
@@ -231,6 +228,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('YourProfileController/sendingToFriendsPage') ?>"><?php echo $friendsCount ?> Friends</a>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('YourProfileController/sendingToFriendsPage') ?>">Logout</a>
                         </li>
                     </ul>
                 </div>

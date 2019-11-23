@@ -30,4 +30,13 @@ class EditProfile extends CI_Model
             $this->db->insert('UserGenre', $userGenreData);
         }
     }
+
+    public function uploadUserInfo($firstName, $lastName) {
+        $updateArray = array(
+            'firstName'=>$firstName,
+            'lastName'=>$lastName,
+        );
+        $this->db->where('email', $this->session->userdata('email'));
+        $this->db->update('User', $updateArray);
+    }
 }

@@ -40,7 +40,7 @@ class YourProfileController extends CI_Controller
             $this->load->view('properties/login');
         } else {
             $this->load->model('FriendsPageService/GetFriends');
-            $friendsResult = $this->GetFriends->getFollowersEmails();
+            $friendsResult = $this->GetFriends->getFollowingEmails();
             $returnArray = array(
                 'friendsResult' => $friendsResult,
             );

@@ -40,9 +40,13 @@ $pageName = 'searchResult';
             <div class="col-sm-follow">
               <a class="btn-follow" href="<?php echo site_url('GenreSearchController/followGenreResultUser/' . $searchResult[$x]['userId'] . '/' . $genreType) ?>">Follow</a>
             </div>
-          <?php } else { ?>
+          <?php } else if ($searchResult[$x]['isFollowing'] && $searchResult[$x]['isFriend']) {  ?>
             <div class="col-sm-follow">
-              <a class="btn-follow" href="#">Followed</a>
+              <a class="btn-follow" href="#">Friends</a>
+            </div>
+          <?php } else if ($searchResult[$x]['isFollowing']) { ?>
+            <div class="col-sm-follow">
+              <a class="btn-follow" href="#">Following</a>
             </div>
           <?php } ?>
         </div>

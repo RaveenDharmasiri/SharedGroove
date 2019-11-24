@@ -96,6 +96,35 @@ class SearchGenre extends CI_Model
             }
         }
 
+        return $this->getAllFollowers($genreUserDetailArray);
+    }
+
+    public function getAllFollowers($genreUserDetailArray) {
+        $followers = array();
+        $this->db->select('mainUser');
+        $this->db->from('UserFollowing');
+        $this->db->where('followingUser', $this->session->userdata('email'));
+        $query = $this->db->get();
+
+        foreach($query->result() as $follower){
+            array_push($followers, $follower->mainUser);
+        }
+
+        return $this->findTheFriends($followers, $genreUserDetailArray);
+    }
+
+    public function findTheFriends($followers, $genreUserDetailArray) {
+        $genreUserDetailArraySize = sizeof($genreUserDetailArray);
+        $followersSize = sizeof($followers);
+
+        for ($x = 0; $x < $genreUserDetailArraySize; $x++) {
+            for ($y = 0; $y < $followersSize; $y++) {
+                if ($genreUserDetailArray[$x]->getEmail() == $followers[$y] && $genreUserDetailArray[$x]->getIsFollowing()) {
+                    $genreUserDetailArray[$x]->setIsFriend(true);
+                }
+            }
+        }
+
         return $this->configTheReturnObject($genreUserDetailArray);
     }
 
@@ -113,6 +142,7 @@ class SearchGenre extends CI_Model
                 'profilePicture' => $genreUserDetailArray[$x]->getProfilePicture(),
                 'isFollowing' => $genreUserDetailArray[$x]->getIsFollowing(),
                 'email' => $genreUserDetailArray[$x]->getEmail(),
+                'isFriend'=>$genreUserDetailArray[$x]->getIsFriend(),
             );
 
             array_push($returnArray, $genreUserDetails);

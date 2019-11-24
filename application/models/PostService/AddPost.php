@@ -6,14 +6,13 @@ class AddPost extends CI_Model{
         $this->load->database();
     }
 
-    public function postMessage($postMessage){
+    public function postContent($postContent){
         $timestamp = date('Y-m-d H:i:s');
         $data_array = array(
-            'postContent' => $postMessage,
+            'postContent' => $postContent,
             'creatorEmail' => $this->session->userdata('email'),
             'postTimeStamp'=> $timestamp,
         );
-        $this->db->insert('post',$data_array);
+        $this->db->insert('Post', $data_array);
     }
-
 }

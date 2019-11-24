@@ -1,0 +1,91 @@
+body {
+    background-image: url('../images/register_login_backgroundimage.jpg');
+    background-size: cover;
+    margin-top: 20px;
+    /* background: #fed800 */
+}
+
+.font-weight-sitename {
+    font-size: 3.98rem;
+    font-weight: 300;
+    text-align: center;
+    background: transparent;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #23232d;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
+.text-nowrap {
+    white-space: nowrap!important;
+    color: white;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    color: white;
+}
+
+#profileImage {
+    display: none;
+}
+
+#profileDisplay {
+    vertical-align: middle;
+    border-style: groove;
+    width: 140px;
+}
+
+.bootstrap-select .bs-ok-default::after {
+    width: 0.3em;
+    height: 0.6em;
+    border-width: 0 0.1em 0.1em 0;
+    transform: rotate(45deg) translateY(0.5rem);
+}
+
+.btn.dropdown-toggle:focus {
+    outline: none !important;
+}
+
+.select-menu-title {
+    display: inline-block;
+    margin-bottom: .5rem;
+    color: white;
+    font-size: x-large;
+}
+
+.genre-list-title {
+    display: inline-block;
+    margin-bottom: .5rem;
+    color: white;
+    font-size: x-large;
+}
+
+.genre-type-name {
+    color: white;
+    margin-bottom: 4px;
+}
+
+.mb-3 {
+    margin-bottom: 1rem!important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-error-message {
+    margin-top: 0;
+    margin-bottom: 1px;
+    color: red;
+    margin-left: 21px;
+}

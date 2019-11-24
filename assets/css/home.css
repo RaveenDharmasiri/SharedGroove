@@ -1,0 +1,115 @@
+body {
+    background-color: #fed800;
+}
+
+.bg-white {
+    background-color: transparent !important;
+}
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 3.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.h5 {
+    color: white;
+}
+
+.text-muted {
+    color: white !important;
+}
+
+.card-text {
+    color: white;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #20232d;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.38);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.card-title {
+    margin-bottom: .75rem;
+    color: white;
+}
+
+.full-name {
+    color: white !important;
+    margin-bottom: 17px;
+    font-size: x-large;
+}
+
+.genre-list {
+    color: white !important;
+}
+
+.followers-title {
+    color: black !important;
+    font-size: x-large;
+}
+
+.following-title {
+    color: black !important;
+    font-size: x-large;
+}
+
+.follower-count {
+    color: black !important;
+}
+
+.following-count {
+    color: black !important;
+}
+
+.publication-card {
+    margin-bottom: 20px;
+}
+
+.card-footer a {
+    color: #fed800;
+}
+
+.nav-item a {
+    color: #fed800;
+}
+
+.nav-item a:hover {
+    color: #fed80078;
+}
+
+.card-body hr {
+    border-top: solid 1px white;
+}
+
+.genre-list {
+    color: #fed800 !important;
+}
+
+.no-post-message {
+    font-size: 3.5rem;
+    text-align: center;
+}

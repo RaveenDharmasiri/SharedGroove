@@ -53,9 +53,9 @@ class UserManagementController extends CI_Controller
         $password = $this->input->get('password');
 
         $this->load->model('Login');
-        $emailInstanceCount = $this->Login->checkIfEmailAlreadyExists($email, $password);
+        $userExists = $this->Login->checkIfEmailAlreadyExists($email, $password);
 
-        if ($emailInstanceCount > 0) {
+        if ($userExists) {
             $this->session->set_userdata('email', $email);
             $this->sendingToHomePage();
         } else {

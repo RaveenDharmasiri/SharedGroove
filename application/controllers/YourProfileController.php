@@ -45,4 +45,9 @@ class YourProfileController extends CI_Controller
             $this->load->view('properties/friends', $returnArray);
         }
     }
+
+    public function logout() {
+        unset($_SESSION['email']);
+        $this->load->view('properties/login');
+    }
 }

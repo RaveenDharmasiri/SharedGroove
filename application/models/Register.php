@@ -17,11 +17,12 @@ class Register extends CI_Model
     }
 
     public function insertUser($firstName, $lastName, $email, $password) {
+        $passHash = password_hash($password, PASSWORD_DEFAULT);
         $userData = array(
             'firstName'=>$firstName,
             'lastName'=>$lastName,
             'email'=>$email,
-            'password'=>$password
+            'password'=>$passHash
         );
 
         $this->db->insert('User', $userData);    

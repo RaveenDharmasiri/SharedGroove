@@ -13,14 +13,21 @@ class Login extends CI_Model
     {
         $array = array(
             'email' => $email,
-            'password' => $password
         );
         $this->db->where($array);
-        $result = $this->db->get('User');
+        $query = $this->db->get('User');
 
-        $emailInstanceCount = $result->num_rows();
+        $dbPassword = $query->row_array()['password'];
 
-        return $emailInstanceCount;
+        if(password_verify($password,$dbPassword)) {
+            return true;
+        } else {
+            return false;
+        }
+
+        // $emailInstanceCount = $query->num_rows();
+
+        // return $emailInstanceCount;
     }
 
     public function getUserDetails($email, $password)

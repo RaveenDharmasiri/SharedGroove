@@ -108,7 +108,7 @@
                         </li>
                         <hr>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('YourProfileController/sendingToFriendsPage') ?>">Logout</a>
+                            <a class="nav-link" href="<?php echo site_url('YourProfileController/logout') ?>">Logout</a>
                         </li>
                     </ul>
                 </div>

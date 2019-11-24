@@ -1,5 +1,6 @@
 <?php
 include('User.php');
+include('Post.php');
 class HomeData extends CI_Model
 {
 
@@ -116,11 +117,118 @@ class HomeData extends CI_Model
 
         $user->setFriendCount(sizeof($friendsEmails));
 
-        return $this->configReturnObject($user);
+        return $this->getUserPosts($user);
     }
     //End
 
-    public function configReturnObject($user)
+    private function getUserPosts($user)
+    {
+        $this->db->select('*');
+        $this->db->from('Post');
+        $this->db->where('creatorEmail', $this->session->userdata('email'));
+        $query = $this->db->get();
+
+        $allUserRelatedPostResults = $query->result();
+
+        $homePosts = array();
+
+        if ($query->num_rows() > 0) {
+            foreach ($allUserRelatedPostResults as $post) {
+                $postObj = new Post();
+                $postObj->setPostId($post->postId);
+                $postObj->setPostContent($post->postContent);
+                $postObj->setCreatorEmail($post->creatorEmail);
+                $postObj->setPostTimeStamp($post->postTimestamp);
+                $postObj->setCreatorId($user->getUserId());
+                $postObj->setCreatorFirstName($user->getFirstName());
+                $postObj->setCreatorLastName($user->getLastName());
+                $postObj->setCreatorProfilePicture($user->getProfilePicture());
+
+                array_push($homePosts, $postObj);
+            }
+        }
+
+        return $this->getFollowingUserEmails($homePosts, $user);
+    }
+
+    // Get the posts of the users followed by the currently logged in user - START
+    private function getFollowingUserEmails($homePosts, $user)
+    {
+        $followingEmails = array();
+        $this->db->select('followingUser');
+        $this->db->from('UserFollowing');
+        $this->db->where('mainUser', $this->session->userdata('email'));
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $followingEmails = $query->result();
+            return $this->getFollowingUserPosts($homePosts, $user, $followingEmails);
+        } else {
+            return $this->configHomePostArray($homePosts, $user);
+        }
+    }
+
+    private function getFollowingUserPosts($homePosts, $user, $followingEmails)
+    {
+        foreach ($followingEmails as $following) {
+            $this->db->select('*');
+            $this->db->from('Post');
+            $this->db->where('creatorEmail', $following->followingUser);
+            $postQuery = $this->db->get();
+
+            if ($postQuery->num_rows() > 0) {
+                $this->db->select('*');
+                $this->db->from('User');
+                $this->db->where('email', $following->followingUser);
+                $followingUserQuery = $this->db->get();
+
+                $userDetails = $followingUserQuery->row_array();
+
+                foreach ($postQuery->result() as $post) {
+                    $postObj = new Post();
+                    $postObj->setPostId($post->postId);
+                    $postObj->setPostContent($post->postContent);
+                    $postObj->setCreatorEmail($post->creatorEmail);
+                    $postObj->setPostTimeStamp($post->postTimestamp);
+                    $postObj->setCreatorId($userDetails['userId']);
+                    $postObj->setCreatorFirstName($userDetails['firstName']);
+                    $postObj->setCreatorLastName($userDetails['lastName']);
+                    $postObj->setCreatorProfilePicture($userDetails['profilePicture']);
+
+                    array_push($homePosts, $postObj);
+                }
+            }
+        }
+
+        return $this->configHomePostArray($homePosts, $user);
+    }
+
+    private function configHomePostArray($homePosts, $user)
+    {
+        if (sizeof($homePosts) > 0) {
+            arsort($homePosts);
+            $homePostArray = array();
+            foreach ($homePosts as $homePost) {
+                $homePostDetails = array(
+                    'postId'=>$homePost->getPostId(),
+                    'postContent' => $homePost->getPostContent(),
+                    'creatorEmail' => $homePost->getCreatorEmail(),
+                    'postTimeStamp' => $homePost->getPostTimestamp(),
+                    'creatorId' => $homePost->getCreatorId(),
+                    'creatorFirstName' => $homePost->getCreatorFirstName(),
+                    'creatorLastName' => $homePost->getCreatorLastName(),
+                    'creatorProfilePicture' => $homePost->getCreatorProfilePicture(),
+                );
+
+                array_push($homePostArray, $homePostDetails);
+            }
+            return $this->configReturnObject($homePostArray, $user);
+        } else {
+            return $this->configReturnObject($homePosts, $user);
+        }
+    }
+
+    private function configReturnObject($homePosts, $user)
     {
         $returnArray = array(
             'userId' => $user->getUserId(),
@@ -130,7 +238,8 @@ class HomeData extends CI_Model
             'followerCount' => $user->getFollowerCount(),
             'followingCount' => $user->getFollowingCount(),
             'userGenres' => $user->getUserGenres(),
-            'friendsCount'=>$user->getFriendCount(),
+            'friendsCount' => $user->getFriendCount(),
+            'homePosts' => $homePosts,
         );
 
         return $returnArray;

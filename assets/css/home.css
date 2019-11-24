@@ -108,3 +108,8 @@ body {
 .genre-list {
     color: #fed800 !important;
 }
+
+.no-post-message {
+    font-size: 3.5rem;
+    text-align: center;
+}

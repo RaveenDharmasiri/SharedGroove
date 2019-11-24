@@ -12,7 +12,6 @@ class UserProfileController extends CI_Controller
             $this->load->model('UserProfileService/UserProfileData');
             $userProfileData = $this->UserProfileData->getUserProfileData($userId);
             $this->load->view('properties/userProfile', $userProfileData);
-            var_dump($userProfileData);
         }
     }
 
@@ -25,7 +24,6 @@ class UserProfileController extends CI_Controller
             $this->load->model('YourProfileService/YourProfileData');
             $userProfileData = $this->YourProfileData->getUserProfileData();
             $this->load->view('properties/yourProfile', $userProfileData);
-            var_dump($userProfileData);
         }
     }
 }

@@ -74,7 +74,7 @@
                 <div class="card-body">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-                            <form action="<?php echo base_url('/index.php/HomeManagementController/postMessage') ?>" method="POST">
+                            <form action="<?php echo base_url('/index.php/HomeManagementController/setPost') ?>" method="POST">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
                                     <textarea class="form-control" id="userPost" name="userPost" rows="3" placeholder="What are you thinking?"></textarea>

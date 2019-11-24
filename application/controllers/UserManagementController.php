@@ -50,9 +50,6 @@ class UserManagementController extends CI_Controller
         $userDetailsArray = $this->Login->getUserDetails($email, $password);
 
         if ($emailInstanceCount > 0) {
-            // $this->session->set_userdata('firstName', $userDetailsArray['firstName']);
-            // $this->session->set_userdata('lastName', $userDetailsArray['lastName']);
-            // $this->session->set_userdata('profilePicture', $userDetailsArray['profilePicture']);
             $this->session->set_userdata('email', $email);
             $this->sendingToHomePage();
         } else {

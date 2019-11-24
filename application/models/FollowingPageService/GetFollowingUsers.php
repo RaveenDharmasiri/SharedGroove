@@ -13,7 +13,11 @@ class GetFollowingUsers extends CI_Model {
         $this->db->where('mainUser', $this->session->userdata('email'));
         $query = $this->db->get();
 
-        return $this->getTheEmailsOfTheFollowingUser($query->result());
+        if ($query->num_rows() > 0) {
+            return $this->getTheEmailsOfTheFollowingUser($query->result());
+        } else {
+            return null;
+        }
     }
 
     private function getTheEmailsOfTheFollowingUser($followingUserObjects) {

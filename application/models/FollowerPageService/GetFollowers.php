@@ -17,11 +17,16 @@ class GetFollowers extends CI_Model
 
         $userFollowersEmailsArray = array();
 
-        foreach ($query->result() as $follower) {
-            array_push($userFollowersEmailsArray, $follower->mainUser);
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $follower) {
+                array_push($userFollowersEmailsArray, $follower->mainUser);
+            }
+
+            return $this->getUserFollowersDetails($userFollowersEmailsArray);
+        } else {
+            return null;
         }
 
-        return $this->getUserFollowersDetails($userFollowersEmailsArray);
     }
 
     public function getUserFollowersDetails($userFollowersEmailsArray)
@@ -69,17 +74,18 @@ class GetFollowers extends CI_Model
         return $this->configReturnObject($followersArray);
     }
 
-    public function configReturnObject($followersArray){
+    public function configReturnObject($followersArray)
+    {
         $returnArray = array();
 
-        foreach($followersArray as $follower) {
-            $followerDetails = array (
-                'userId'=>$follower->getUserId(),
-                'firstName'=>$follower->getFirstName(),
-                'lastName'=>$follower->getLastName(),
-                'email'=>$follower->getEmail(),
-                'isFollowing'=>$follower->getIsFollowing(),
-                'profilePicture'=>$follower->getProfilePicture()
+        foreach ($followersArray as $follower) {
+            $followerDetails = array(
+                'userId' => $follower->getUserId(),
+                'firstName' => $follower->getFirstName(),
+                'lastName' => $follower->getLastName(),
+                'email' => $follower->getEmail(),
+                'isFollowing' => $follower->getIsFollowing(),
+                'profilePicture' => $follower->getProfilePicture()
             );
             array_push($returnArray, $followerDetails);
         }

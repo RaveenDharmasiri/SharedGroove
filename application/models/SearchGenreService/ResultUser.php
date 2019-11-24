@@ -1,59 +1,82 @@
 <?php
 
-class ResultUser {
+class ResultUser
+{
     private $userId;
     private $firstName;
     private $lastName;
     private $profilePicture;
     private $isFollowing = false;
     private $email;
+    private $isFriend = false;
 
-    public function setUserId($userId) {
+    public function setUserId($userId)
+    {
         $this->userId = $userId;
     }
 
-    public function getUserId() {
+    public function getUserId()
+    {
         return $this->userId;
     }
 
-    public function setFirstName($firstName) {
+    public function setFirstName($firstName)
+    {
         $this->firstName = $firstName;
     }
 
-    public function getFirstName() {
+    public function getFirstName()
+    {
         return $this->firstName;
     }
 
-    public function setLastName($lastName){
+    public function setLastName($lastName)
+    {
         $this->lastName = $lastName;
     }
 
-    public function getLastName() {
+    public function getLastName()
+    {
         return $this->lastName;
     }
 
-    public function setProfilePicture($profilePicture) {
+    public function setProfilePicture($profilePicture)
+    {
         $this->profilePicture = $profilePicture;
     }
 
-    public function getProfilePicture() {
+    public function getProfilePicture()
+    {
         return $this->profilePicture;
     }
 
-    public function setIsFollowing($isFollowing) {
+    public function setIsFollowing($isFollowing)
+    {
         $this->isFollowing = $isFollowing;
     }
 
-    public function getIsFollowing() {
+    public function getIsFollowing()
+    {
         return $this->isFollowing;
     }
 
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
+    public function setIsFriend($isFriend)
+    {
+        $this->isFriend = $isFriend;
+    }
+
+    public function getIsFriend()
+    {
+        return $this->isFriend;
+    }
 }

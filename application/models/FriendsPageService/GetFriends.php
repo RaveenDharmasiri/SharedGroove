@@ -9,7 +9,26 @@ class GetFriends extends CI_model
         $this->load->database();
     }
 
-    public function getFollowersEmails()
+    public function getFollowingEmails()
+    {
+        $followingEmails = array();
+        $this->db->select('followingUser');
+        $this->db->from('UserFollowing');
+        $this->db->where('mainUser', $this->session->userdata('email'));
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0){
+            foreach ($query->result() as $following) {
+                array_push($followingEmails, $following->followingUser);
+            }
+    
+            return $this->getFollowersEmails($followingEmails);
+        } else {
+            return null;
+        }
+    }
+
+    private function getFollowersEmails($followingEmails)
     {
         $followerEmails = array();
         $this->db->select('mainUser');
@@ -19,21 +38,6 @@ class GetFriends extends CI_model
 
         foreach ($query->result() as $follower) {
             array_push($followerEmails, $follower->mainUser);
-        }
-
-        return $this->getFollowingEmails($followerEmails);
-    }
-
-    private function getFollowingEmails($followerEmails)
-    {
-        $followingEmails = array();
-        $this->db->select('followingUser');
-        $this->db->from('UserFollowing');
-        $this->db->where('mainUser', $this->session->userdata('email'));
-        $query = $this->db->get();
-
-        foreach ($query->result() as $following) {
-            array_push($followingEmails, $following->followingUser);
         }
 
         return $this->getTheFriends($followerEmails, $followingEmails);

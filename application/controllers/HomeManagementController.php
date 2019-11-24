@@ -54,7 +54,7 @@ class HomeManagementController extends CI_Controller
             $this->load->view('properties/login');
         } else {
             $this->load->model('FriendsPageService/GetFriends');
-            $friendsResult = $this->GetFriends->getFollowersEmails();
+            $friendsResult = $this->GetFriends->getFollowingEmails();
             $returnArray = array(
                 'friendsResult'=>$friendsResult,
             );
@@ -63,15 +63,16 @@ class HomeManagementController extends CI_Controller
         }
     }
 
-    // public function postMessage()
-    // {
-    //     $currentUserEmail = $this->session->userdata('email');
-    //     if ($currentUserEmail == null) {
-    //         $this->load->view('properties/login');
-    //     } else {
-    //         $postMessage = $this->input->post('userPost');
-    //         $this->load->model('PostService/AddPost');
-    //         $this->AddPost->postMessage($postMessage);
-    //     }
-    // }
+    public function setPost()
+    {
+        $currentUserEmail = $this->session->userdata('email');
+        if ($currentUserEmail == null) {
+            $this->load->view('properties/login');
+        } else {
+            $postContent = $this->input->post('userPost');
+            var_dump($postContent);
+            $this->load->model('PostService/AddPost');
+            $this->AddPost->postContent($postContent);
+        }
+    }
 }

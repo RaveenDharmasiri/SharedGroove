@@ -2,19 +2,26 @@
 
 class UserManagementController extends CI_Controller
 {
+    /**
+     * This is the main function of the controller. 
+     * This function checks if the session has the email of the currently logged in user.
+     * IF the data is unavailable, then the user is then sent to the login page.
+     * IF the data is available, then the user is sent to the Home page.
+     */
     public function index()
     {
 
-        // $currentUserEmail = $this->session->userdata('email');
-        // if($currentUserEmail == null) {
-        //     $this->load->view('properties/login');
-        // } else {
-        //     $this->sendingToHomePage();
-        // }
-
-        $this->load->view('properties/login');
+        $currentUserEmail = $this->session->userdata('email');
+        if($currentUserEmail == null) {
+            $this->load->view('properties/login');
+        } else {
+            $this->sendingToHomePage();
+        }
     }
 
+    /**
+     * This function insert a user information into a database when they Register.
+     */
     public function insertUser()
     {
         $firstName  = $this->input->post('firstName');
@@ -47,7 +54,6 @@ class UserManagementController extends CI_Controller
 
         $this->load->model('Login');
         $emailInstanceCount = $this->Login->checkIfEmailAlreadyExists($email, $password);
-        $userDetailsArray = $this->Login->getUserDetails($email, $password);
 
         if ($emailInstanceCount > 0) {
             $this->session->set_userdata('email', $email);
@@ -69,7 +75,6 @@ class UserManagementController extends CI_Controller
             $this->load->model('HomePageService/HomeData');
             $homePageData = $this->HomeData->getHomeInformation();
             $this->load->view('properties/Home', $homePageData);
-            var_dump($homePageData);
         }
     }
 
@@ -89,7 +94,7 @@ class UserManagementController extends CI_Controller
     private function uploadImageToFolder($firstName, $lastName, $email)
     {
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|png|JPEG';
 
         $this->load->library('upload', $config);
         $this->upload->initialize($config);

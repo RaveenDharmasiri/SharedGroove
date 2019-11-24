@@ -1,5 +1,6 @@
 <?php
 include('User.php');
+include('Post.php');
 class YourProfileData extends CI_Model
 {
     public function __construct()
@@ -115,11 +116,64 @@ class YourProfileData extends CI_Model
 
         $user->setFriendCount(sizeof($friendsEmails));
 
-        return $this->configReturnObject($user);
+        return $this->getUserPosts($user);
     }
     //End
 
-    public function configReturnObject($user)
+    private function getUserPosts($user)
+    {
+        $this->db->select('*');
+        $this->db->from('Post');
+        $this->db->where('creatorEmail', $this->session->userdata('email'));
+        $query = $this->db->get();
+
+        $allUserRelatedPostResults = $query->result();
+
+        $yourPosts = array();
+
+        if ($query->num_rows() > 0) {
+            foreach ($allUserRelatedPostResults as $post) {
+                $postObj = new Post();
+                $postObj->setPostId($post->postId);
+                $postObj->setPostContent($post->postContent);
+                $postObj->setCreatorEmail($post->creatorEmail);
+                $postObj->setPostTimeStamp($post->postTimestamp);
+                $postObj->setCreatorId($user->getUserId());
+                $postObj->setCreatorFirstName($user->getFirstName());
+                $postObj->setCreatorLastName($user->getLastName());
+                $postObj->setCreatorProfilePicture($user->getProfilePicture());
+
+                array_push($yourPosts, $postObj);
+            }
+            return $this->configHomePostArray($yourPosts, $user);
+        } else {
+            return $this->configReturnObject($yourPosts, $user);
+        }
+    }
+
+    private function configHomePostArray($yourPosts, $user)
+    {
+        $yourPostArray = array();
+        arsort($yourPosts);
+        foreach ($yourPosts as $yourPost) {
+            $yourPostDetails = array(
+                'postId' => $yourPost->getPostId(),
+                'postContent' => $yourPost->getPostContent(),
+                'creatorEmail' => $yourPost->getCreatorEmail(),
+                'postTimeStamp' => $yourPost->getPostTimestamp(),
+                'creatorId' => $yourPost->getCreatorId(),
+                'creatorFirstName' => $yourPost->getCreatorFirstName(),
+                'creatorLastName' => $yourPost->getCreatorLastName(),
+                'creatorProfilePicture' => $yourPost->getCreatorProfilePicture(),
+            );
+
+            array_push($yourPostArray, $yourPostDetails);
+        }
+
+        return $this->configReturnObject($yourPostArray, $user);
+    }
+
+    public function configReturnObject($yourPosts, $user)
     {
         $returnArray = array(
             'userId' => $user->getUserId(),
@@ -130,7 +184,8 @@ class YourProfileData extends CI_Model
             'followerCount' => $user->getFollowerCount(),
             'followingCount' => $user->getFollowingCount(),
             'userGenres' => $user->getUserGenres(),
-            'friendsCount'=>$user->getFriendCount(),
+            'friendsCount' => $user->getFriendCount(),
+            'yourPosts'=>$yourPosts,
         );
 
         return $returnArray;

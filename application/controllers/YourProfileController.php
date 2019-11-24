@@ -12,7 +12,6 @@ class YourProfileController extends CI_Controller
             $returnArray = array(
                 'userFollowers' => $userFollowers
             );
-            var_dump($returnArray);
             $this->load->view('properties/followers', $returnArray);
         }
     }
@@ -29,7 +28,6 @@ class YourProfileController extends CI_Controller
                 'followingUserResults' => $followingUserResults,
             );
             $this->load->view('properties/following', $returnArray);
-            var_dump($returnArray);
         }
     }
 
@@ -45,7 +43,6 @@ class YourProfileController extends CI_Controller
                 'friendsResult' => $friendsResult,
             );
             $this->load->view('properties/friends', $returnArray);
-            var_dump($returnArray);
         }
     }
 }

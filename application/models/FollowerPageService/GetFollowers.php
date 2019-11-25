@@ -1,5 +1,7 @@
 <?php
 include('Follower.php');
+
+// Target aim of this function is to get all the followers of the currently logged in user.
 class GetFollowers extends CI_Model
 {
     public function __construct()
@@ -8,6 +10,9 @@ class GetFollowers extends CI_Model
         $this->load->database();
     }
 
+    /**
+     * Get the emails of the followers of the currently logged in user's.
+     */
     public function getUserFollowersEmails()
     {
         $this->db->select('*');
@@ -29,6 +34,7 @@ class GetFollowers extends CI_Model
 
     }
 
+    // This method get the details of the followers by searching them in the User table based on the emails.
     public function getUserFollowersDetails($userFollowersEmailsArray)
     {
         $followersArray = array();
@@ -37,6 +43,7 @@ class GetFollowers extends CI_Model
             $this->db->from('User');
             $this->db->where('email', $userFollowersEmailsArray[$x]);
             $query = $this->db->get();
+            // An object is created to represent the followers of the currently logged in user.
             $follower = new Follower();
             $follower->setUserId($query->row_array()['userId']);
             $follower->setFirstName($query->row_array()['firstName']);
@@ -49,6 +56,7 @@ class GetFollowers extends CI_Model
         return $this->getTheFollowingUsersEmails($followersArray);
     }
 
+    // This method will get the emails of all the users that the currently logged in user follows.
     public function getTheFollowingUsersEmails($followersArray)
     {
         $this->db->select('*');
@@ -61,6 +69,7 @@ class GetFollowers extends CI_Model
         return $this->checkIfTheFollwersAreBeingFollowed($followersArray, $followingsArray);
     }
 
+    // This method will check if the currently logged in user follows his or her followers.
     public function checkIfTheFollwersAreBeingFollowed($followersArray, $followingsArray)
     {
         foreach ($followersArray as $follower) {
@@ -74,6 +83,7 @@ class GetFollowers extends CI_Model
         return $this->configReturnObject($followersArray);
     }
 
+    // This method will put all the information into a readable array that will be sent to the view once this method is called
     public function configReturnObject($followersArray)
     {
         $returnArray = array();

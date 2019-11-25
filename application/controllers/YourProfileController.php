@@ -1,6 +1,9 @@
 <?php
 class YourProfileController extends CI_Controller
 {
+    /**
+     * This function will direct the user to page that shows all the users who are following the currently logged in user.
+     */
     public function sendingToFollowersPage()
     {
         $currentUserEmail = $this->session->userdata('email');
@@ -16,6 +19,9 @@ class YourProfileController extends CI_Controller
         }
     }
 
+    /**
+     * This function will direct the user to the page that shows all the users who are being followed by the currently logged in user.
+     */
     public function sendingToFollowingPage()
     {
         $currentUserEmail = $this->session->userdata('email');
@@ -31,6 +37,9 @@ class YourProfileController extends CI_Controller
         }
     }
 
+    /**
+     * This function will direct the user to the page that shows all the users who are being followed by the currently logged in user.
+     */
     public function sendingToFriendsPage()
     {
         $currentUserEmail = $this->session->userdata('email');
@@ -46,6 +55,9 @@ class YourProfileController extends CI_Controller
         }
     }
 
+    /**
+     * This function will unset the session and take the user to the login page.
+     */
     public function logout() {
         unset($_SESSION['email']);
         $this->load->view('properties/login');

@@ -1,5 +1,6 @@
 <?php
 include('Friend.php');
+// Main functionality of this function is to find the friends of the logged in user.
 class GetFriends extends CI_model
 {
 
@@ -9,6 +10,7 @@ class GetFriends extends CI_model
         $this->load->database();
     }
 
+    // First get the emails of the users followed by the logged in the user.
     public function getFollowingEmails()
     {
         $followingEmails = array();
@@ -28,6 +30,7 @@ class GetFriends extends CI_model
         }
     }
 
+    // Get the emails of the followers of the logged in user.
     private function getFollowersEmails($followingEmails)
     {
         $followerEmails = array();
@@ -43,6 +46,10 @@ class GetFriends extends CI_model
         return $this->getTheFriends($followerEmails, $followingEmails);
     }
 
+    /**
+     * Compare the follower emails and the following emails to see which email is common to both the array.
+     * If an email is common to both the array that means the user who owns that email is a friend of the logged in user.
+     */
     private function getTheFriends($followerEmails, $followingEmails)
     {
         $friendsEmails = array();
@@ -57,6 +64,7 @@ class GetFriends extends CI_model
         return $this->getFriendsDetails($friendsEmails);
     }
 
+    // Get the details of the friends from the Users array based on the emails
     public function getFriendsDetails($friendsEmails)
     {
         $friendsObjectArray = array();
@@ -80,6 +88,7 @@ class GetFriends extends CI_model
         return $this->configReturnObject($friendsObjectArray);
     }
 
+    // This function is used to send all the gathered information to the view.
     public function configReturnObject($friendsObjectArray)
     {
         $returnObject = array();

@@ -1,6 +1,9 @@
 <?php
 class UserProfileController extends CI_Controller
 {
+    /**
+     * This function will allow the currently logged in user to follow another user by visiting their profiles
+     */
     public function followUser($userId)
     {
         $currentUserEmail = $this->session->userdata('email');
@@ -15,6 +18,11 @@ class UserProfileController extends CI_Controller
         }
     }
 
+    /**
+     * This function sends the user back to their profile pages. 
+     * 
+     * This function is invoked when the user clicks the YourProfile link when in another users profile.
+     */
     public function sendToYourProfile()
     {
         $currentUserEmail = $this->session->userdata('email');

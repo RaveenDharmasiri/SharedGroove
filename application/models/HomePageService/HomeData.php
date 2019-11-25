@@ -1,6 +1,7 @@
 <?php
 include('User.php');
 include('Post.php');
+// Main purpose of this function is to sent all the user related data to the frontend when they visit theie home page.
 class HomeData extends CI_Model
 {
 
@@ -15,6 +16,7 @@ class HomeData extends CI_Model
         return $this->getUserDetails();
     }
 
+    // This information get the details of the currently logged in user from the User table based on their email saved in the session.
     public function getUserDetails()
     {
         $this->db->select('*');
@@ -32,6 +34,7 @@ class HomeData extends CI_Model
         return $this->getUserFollowerCount($user);
     }
 
+    // This function get the followers of the logged in user and then count them which will give the followers count.
     private function getUserFollowerCount($user)
     {
         $this->db->select('*');
@@ -44,6 +47,7 @@ class HomeData extends CI_Model
         return $this->getUserFollowingCount($user);
     }
 
+    // This function get the emails of the users followed by the logged in user. Then get the count for the count of the followers.
     public function getUserFollowingCount($user)
     {
         $this->db->select('*');
@@ -55,6 +59,7 @@ class HomeData extends CI_Model
         return $this->getUserGenres($user);
     }
 
+    // This function get the genres selected by the logged in user. Email saved inthe session will be searched in the UserGenre table to look for all the egnres selected by the logged in user.
     public function getUserGenres($user)
     {
         $this->db->select('genreType');
@@ -73,7 +78,7 @@ class HomeData extends CI_Model
         return $this->getFollowersEmails($user);
     }
 
-    //Friends Count - Start
+    //Friends Count - Start - This function get the count of the friend
     public function getFollowersEmails($user)
     {
         $followerEmails = array();
@@ -89,6 +94,7 @@ class HomeData extends CI_Model
         return $this->getFollowingEmails($user, $followerEmails);
     }
 
+    // First will get the emails of the users followed by the logged in user. 
     private function getFollowingEmails($user, $followerEmails)
     {
         $followingEmails = array();
@@ -104,6 +110,7 @@ class HomeData extends CI_Model
         return $this->getTheFriends($user, $followerEmails, $followingEmails);
     }
 
+    // Then compare the follower emails with the emails of the users followed by the logged user. The count of the user emails belonging to both the arrays is the friends count.
     private function getTheFriends($user, $followerEmails, $followingEmails)
     {
         $friendsEmails = array();
@@ -121,6 +128,7 @@ class HomeData extends CI_Model
     }
     //End
 
+    // This get the posts shared by the logged user.
     private function getUserPosts($user)
     {
         $this->db->select('*');
@@ -135,6 +143,7 @@ class HomeData extends CI_Model
         if ($query->num_rows() > 0) {
             foreach ($allUserRelatedPostResults as $post) {
                 $postObj = new Post();
+                // Each post result is represented by a Post object
                 $postObj->setPostId($post->postId);
                 $postObj->setPostContent($post->postContent);
                 $postObj->setCreatorEmail($post->creatorEmail);
@@ -227,6 +236,7 @@ class HomeData extends CI_Model
             return $this->configReturnObject($homePosts, $user);
         }
     }
+    //END
 
     private function configReturnObject($homePosts, $user)
     {

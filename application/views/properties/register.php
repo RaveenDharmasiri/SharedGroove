@@ -15,7 +15,7 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin" action="/SharedGroove/index.php/UserManagementController/insertUser" method="POST">
+    <form class="form-signin" action='<?php echo base_url('/index.php/UserManagementController/insertUser'); ?>' method="POST">
         <h1 class="h3 mb-3 font-weight-sitename">SharedGroove</h1>
         <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
 

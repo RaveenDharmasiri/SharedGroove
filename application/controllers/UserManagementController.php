@@ -87,7 +87,7 @@ class UserManagementController extends CI_Controller
         } else {
             $this->load->model('HomePageService/HomeData');
             $homePageData = $this->HomeData->getHomeInformation();
-            $this->load->view('properties/Home', $homePageData);
+            $this->load->view('properties/home', $homePageData);
         }
     }
 

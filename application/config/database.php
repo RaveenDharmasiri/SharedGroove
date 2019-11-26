@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'phpmyadmin.ecs.westminster.ac.uk',
+	'hostname' => 'support.ecs.westminster.ac.uk',
 	'username' => 'w1628049',
 	'password' => '2HGM5i2esXCd',
 	'database' => 'w1628049_0',

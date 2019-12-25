@@ -99,11 +99,11 @@ class HomeManagementController extends CI_Controller
                 $this->AddPost->postContent($postContent);
                 $this->load->model('HomePageService/HomeData');
                 $homePageData = $this->HomeData->getHomeInformation();
-                $this->load->view('properties/Home', $homePageData);
+                $this->load->view('properties/home', $homePageData);
             } else {
                 $this->load->model('HomePageService/HomeData');
                 $homePageData = $this->HomeData->getHomeInformation();
-                $this->load->view('properties/Home', $homePageData);
+                $this->load->view('properties/home', $homePageData);
             }
         }
     }

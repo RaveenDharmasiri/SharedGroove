@@ -87,7 +87,7 @@ class UserManagementController extends CI_Controller
         } else {
             $this->load->model('HomePageService/HomeData');
             $homePageData = $this->HomeData->getHomeInformation();
-            $this->load->view('properties/Home', $homePageData);
+            $this->load->view('properties/home', $homePageData);
         }
     }
 
@@ -147,7 +147,7 @@ class UserManagementController extends CI_Controller
     private function getProfileImageRelativePath($imageFullPath)
     {
         $splitImageFullPath = explode('/', $imageFullPath);
-        $relativeImagePath = $splitImageFullPath[6] . '/' . $splitImageFullPath[7];
+        $relativeImagePath = $splitImageFullPath[7] . '/' . $splitImageFullPath[8];
         return $relativeImagePath;
     }
 

@@ -61,9 +61,7 @@
         </div>
     </div>
 
-    <div>
-        <input type="submit" value="Create" id="create" />
-    </div>
+    <button id="addContact">Add Contact</button>
 </body>
 
 </html>

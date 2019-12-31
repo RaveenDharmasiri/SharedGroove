@@ -14,6 +14,7 @@
 </head>
 
 <link rel="stylesheet" href="<?php echo base_url('assets/css/home.css'); ?>" />
+<link rel="stylesheet" href="<?php echo base_url('assets/css/contactList.css'); ?>" />
 
 <nav class="navbar navbar-light bg-white">
     <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
@@ -22,16 +23,16 @@
 <body>
     <div class="container">
         <br />
-        <h3 align="center">Create CRUD REST API in Codeigniter - 4</h3>
+        <!-- <h3 align="center">Create CRUD REST API in Codeigniter - 4</h3> -->
         <br />
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 class="panel-title">CRUD REST API in Codeigniter</h3>
+                        <h3 class="panel-title">Contacts</h3>
                     </div>
                     <div class="col-md-6" align="right">
-                        <button type="button" id="add_button" class="btn btn-info btn-xs">Add</button>
+                        <button type="button" id="add_button" class="btn btn-info btn-xs">Add Contact</button>
                     </div>
                 </div>
             </div>
@@ -53,12 +54,6 @@
             </div>
         </div>
     </div>
-
-    <form>
-        <div>
-            <input type="submit" value="Create" id="create" />
-        </div>
-    </form>
 </body>
 
 </html>

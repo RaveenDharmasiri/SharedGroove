@@ -106,6 +106,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('YourProfileController/sendingToFriendsPage') ?>"><?php echo $friendsCount ?> Friends</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('YourProfileController/sendingToContactPage') ?>"> Contacts</a>
+                        </li>
                         <hr>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('YourProfileController/logout') ?>">Logout</a>

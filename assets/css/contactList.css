@@ -1,0 +1,11 @@
+body {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" !important;
+}
+
+.navbar-brand {
+    font-size: 5.25rem !important;
+    font-weight: 600 !important;
+    color: black !important;
+    padding-top: 1.34rem !important;
+    cursor: pointer !important;
+}

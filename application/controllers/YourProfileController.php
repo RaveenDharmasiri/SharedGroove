@@ -55,10 +55,21 @@ class YourProfileController extends CI_Controller
         }
     }
 
+    public function sendingToContactPage()
+    {
+        $currentUserEmail = $this->session->userdata('email');
+        if ($currentUserEmail == null) {
+            $this->load->view('properties/login');
+        } else {
+            $this->load->view('properties/contactList');
+        }
+    }
+
     /**
      * This function will unset the session and take the user to the login page.
      */
-    public function logout() {
+    public function logout()
+    {
         unset($_SESSION['email']);
         $this->load->view('properties/login');
     }

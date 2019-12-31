@@ -1,20 +1,44 @@
 <?php
 
-class AddContact extends CI_Model {
+class AddContact extends CI_Model
+{
     public function __construct()
     {
-        parent:: __construct();
+        parent::__construct();
         $this->load->database();
     }
 
-    public function addContactDetailsToDB($firstName, $surname, $email, $telephoneNo) {
-        $contactDetails = array(
-            'firstName'=>$firstName,
-            'surname'=>$surname,
-            'email'=>$email,
-            'telephoneNo'=>$telephoneNo
-        );
 
-        $this->db->insert('User', $contactDetails);
+
+    public function addContactDetailsToDB($name, $email, $telephoneNo)
+    {
+        if ($this->userAlreadyExists($name)) {
+            return "User name already exsits";
+        } else {
+            $contactDetails = array(
+                'contactName' => $name,
+                'contactEmail' => $email,
+                'contactTelephoneNo' => $telephoneNo
+            );
+
+            $this->db->insert('Contact', $contactDetails);
+
+            return "New Contact Added";
+        }
+    }
+
+    public function userAlreadyExists($name)
+    {
+        $this->db->select('*');
+        $this->db->from('Contact');
+        $this->db->where('contactName', $name);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

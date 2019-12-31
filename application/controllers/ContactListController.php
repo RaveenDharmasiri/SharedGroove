@@ -15,33 +15,28 @@ class ContactListController extends RestController
         parent::__construct();
     }
 
-    public function index_get()
-    {
-        $this->load->view('properties/contactList');
-    }
-
     public function contacts_get()
     {
         $this->load->model('ContactListPageServices/GetContacts');
         $allContacts = $this->GetContacts->getAllContacts();
 
-        $surname = array (
-            'surname' => $allContacts,
-        );
-
-        echo json_encode($surname);
+        echo json_encode($allContacts);
     }
 
     public function contact_post()
     {
-        $firstName = $this->input->post('firstName');
-        $surname = $this->input->post('surname');
+        $name = $this->input->post('name');
         $email = $this->input->post('email');
         $telephoneNo = $this->input->post('telephoneNo');
 
         $this->load->model('ContactListPageServices/AddContact');
-        $this->AddContact->addContactDetailsToDB($firstName, $surname, $email, $telephoneNo);
+        $response = $this->AddContact->addContactDetailsToDB($name, $email, $telephoneNo);
 
+        $data = array (
+            'response' => $response,
+        );
+
+        echo json_encode($data);
 
         // $data = array(
         //     'firstName' => $firstName,

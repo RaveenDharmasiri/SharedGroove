@@ -1,4 +1,4 @@
-console.log(baseUrl);
+// console.log(baseUrl);
 
 $(document).ready(function() {
 
@@ -8,11 +8,8 @@ $(document).ready(function() {
             url: baseUrl + "index.php/ContactListController/contacts",
             dataType: "JSON",
             cache: false,
-            data: {
-                name: 'Raveen',
-            },
             success: function(data) {
-                console.log(data);
+                console.log(data.contacts);
             }
         });
     }
@@ -27,20 +24,22 @@ $(document).ready(function() {
         $('#userModal').modal('show');
     });
 
-    // $("#create").click(function() {
-    //     event.preventDefault();
-    //     $.ajax({
-    //         method: "GET",
-    //         url: baseUrl + "index.php/ContactListController/contacts",
-    //         dataType: "JSON",
-    //         cache: false,
-    //         data: {
-    //             name: 'Raveen',
-    //         },
-    //         success: function(data) {
-    //             console.log(data);
-    //         }
-    //     });
-    //     return false;
-    // });
+    $("#addContact").click(function() {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: baseUrl + "index.php/ContactListController/contact",
+            dataType: "JSON",
+            cache: false,
+            data: {
+                name: 'Clark Kent',
+                email: 'anjala@email.com',
+                telephoneNo: '0711234565'
+            },
+            success: function(data) {
+                console.log(data.response);
+            }
+        });
+        return false;
+    });
 });

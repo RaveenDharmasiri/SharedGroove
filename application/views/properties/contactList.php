@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>CURD REST API in Codeigniter</title>
+    <title>SharedGroove - Contacts</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <button id="addContact">Add Contact</button>
+    <!-- <button id="addContact">Add Contact</button> -->
 </body>
 
 </html>
@@ -75,20 +75,16 @@
                     <h4 class="modal-title">Add Contact</h4>
                 </div>
                 <div class="modal-body">
-                    <label>Enter First Name</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control" />
+                    <label>Enter Name</label>
+                    <input type="text" name="name" id="name" class="form-control" required>
                     <span id="first_name_error" class="text-danger"></span>
                     <br />
-                    <label>Enter Surname Name</label>
-                    <input type="text" name="last_name" id="last_name" class="form-control" />
-                    <span id="last_name_error" class="text-danger"></span>
-                    <br />
                     <label>Enter Email Address</label>
-                    <input type="text" name="emai_address" id="emai_address" class="form-control" />
+                    <input type="email" name="emai_address" id="emai_address" class="form-control" required>
                     <span id="email_address_error" class="text-danger"></span>
                     <br />
                     <label>Enter Telephone Number</label>
-                    <input type="text" name="telephone_no" id="telephone_no" class="form-control" />
+                    <input type="text" name="telephone_no" id="telephone_no" class="form-control" required>
                     <span id="telephone_no_error" class="text-danger"></span>
                     <br />
                 </div>
@@ -98,6 +94,8 @@
                     <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
+
+                <p id="message" style="text-align:center;"></p>
             </div>
         </form>
     </div>

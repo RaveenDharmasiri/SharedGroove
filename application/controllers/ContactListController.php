@@ -8,7 +8,6 @@ require APPPATH . 'libraries/Format.php';
 
 class ContactListController extends RestController
 {
-
     function __construct()
     {
         // Construct the parent class

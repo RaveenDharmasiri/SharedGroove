@@ -13,7 +13,7 @@ class AddContact extends CI_Model
     public function addContactDetailsToDB($name, $email, $telephoneNo)
     {
         if ($this->userAlreadyExists($name)) {
-            return "User name already exsits";
+            return "Contact already exsits";
         } else {
             $contactDetails = array(
                 'contactName' => $name,

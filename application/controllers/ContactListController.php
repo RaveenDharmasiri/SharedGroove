@@ -1,12 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use chriskacerguis\RestServer\RestController;
+require APPPATH . '/libraries/REST_Controller.php';
+require APPPATH . '/libraries/REST_Valid.php';
 
-require APPPATH . 'libraries/RestController.php';
-require APPPATH . 'libraries/Format.php';
-
-class ContactListController extends RestController
+class ContactListController extends REST_Controller
 {
     function __construct()
     {

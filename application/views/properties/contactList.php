@@ -8,8 +8,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script> -->
+
+    <script src="<?php echo base_url('assets/js/libs/underscore.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/libs/backbone.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/models/singleContactModel.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/views/singleContactView.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/views/allContactsView.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/collections/allContacts.js'); ?>"></script>
 
     <script>
         var baseUrl = "<?php echo base_url() ?>"
@@ -17,16 +24,15 @@
 
     <script src="<?php echo base_url('assets/js/contactList.js'); ?>"></script>
 
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/home.css'); ?>" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/contactList.css'); ?>" />
 </head>
 
-<link rel="stylesheet" href="<?php echo base_url('assets/css/home.css'); ?>" />
-<link rel="stylesheet" href="<?php echo base_url('assets/css/contactList.css'); ?>" />
-
-<nav class="navbar navbar-light bg-white">
-    <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
-</nav>
-
 <body>
+    <nav class="navbar navbar-light bg-white">
+        <a class="navbar-brand" href="<?php echo site_url('UserManagementController/sendingToHomePage') ?>">SharedGroove</a>
+    </nav>
+
     <div class="container">
         <br />
         <!-- <h3 align="center">Create CRUD REST API in Codeigniter - 4</h3> -->
@@ -47,8 +53,9 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Telephone No</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>

@@ -13,10 +13,6 @@
 
     <script src="<?php echo base_url('assets/js/libs/underscore.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/libs/backbone.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/models/singleContactModel.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/views/singleContactView.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/views/allContactsView.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/collections/allContacts.js'); ?>"></script>
 
     <script>
         var baseUrl = "<?php echo base_url() ?>"
@@ -35,13 +31,13 @@
 
     <div class="container">
         <br />
-        <!-- <h3 align="center">Create CRUD REST API in Codeigniter - 4</h3> -->
+        <h3 align="center">Contacts</h3>
         <br />
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 class="panel-title">Contacts</h3>
+                        <!-- <h3 class="panel-title">Contacts</h3> -->
                     </div>
                     <div class="col-md-6" align="right">
                         <button type="button" id="add_button" class="btn btn-info btn-xs">Add Contact</button>
@@ -54,21 +50,48 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
                             <th>Telephone No</th>
+                            <th>Email</th>
+                            <th>Tags</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        <tr>
+                            <td id="contactId">1</td>
+                            <td>Raveen Dharmasiri</td>
+                            <td>0711090637</td>
+                            <td>raveen.dharmasiri@gmail.com</td>
+                            <td>Friend, Work</td>
+                            <td><input type="button" onclick="editContactPopUp(1)" value="Edit" /></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td id="contactId">2</td>
+                            <td>Raveen Dharmasiri</td>
+                            <td>0711090637</td>
+                            <td>raveen.dharmasiri@gmail.com</td>
+                            <td>Friend, Work</td>
+                            <td><input type="button" onclick="editContactPopUp(24)" value="Edit" /></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td id="contactId">3</td>
+                            <td>Raveen Dharmasiri</td>
+                            <td>0711090637</td>
+                            <td>raveen.dharmasiri@gmail.com</td>
+                            <td>Friend, Work</td>
+                            <td><input type="button" onclick="editContactPopUp(3)" value="Edit" /></td>
+                            <td><button>Delete</button></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- <button id="addContact">Add Contact</button> -->
+    <a href="<?php echo site_url('TestController/contact_post') ?>">Add Contact</a>
 </body>
 
 </html>
@@ -87,7 +110,7 @@
                     <span id="first_name_error" class="text-danger"></span>
                     <br />
                     <label>Enter Email Address</label>
-                    <input type="email" name="emai_address" id="emai_address" class="form-control" required>
+                    <input type="email" name="email_address" id="email_address" class="form-control" required>
                     <span id="email_address_error" class="text-danger"></span>
                     <br />
                     <label>Enter Telephone Number</label>
@@ -96,9 +119,7 @@
                     <br />
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="user_id" id="user_id" />
-                    <input type="hidden" name="data_action" id="data_action" value="Insert" />
-                    <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+                    <input type="button" name="action" id="action" class="btn btn-success" value="Add" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
 

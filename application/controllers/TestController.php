@@ -12,20 +12,28 @@ class TestController extends CI_Controller {
 
     public function contact_post()
     {
-        $firstName = $this->input->post('firstName');
-        $surname = $this->input->post('surname');
-        $email = $this->input->post('email');
-        $telephoneNo = $this->input->post('telephoneNo');
+        $datax = json_decode(file_get_contents('php://input'), true);
 
-        $this->load->model('ContactListPageServices/AddContact');
-        $this->AddContact->addContactDetailsToDB($firstName, $surname, $email, $telephoneNo);
+        var_dump($datax);
 
-        // $data = array(
-        //     'firstName' => $firstName,
-        //     'lastName' => $lastName,
-        //     'email' => $email,
-        //     'telephoneNo' => $telephoneNo
-        // );
+        $name = $datax['name'];
+        $email = $datax['email'];
+        $telephoneNo = $datax['telephoneNo'];
+
+        // $this->load->model('ContactListPageServices/AddContact');
+        // $response = $this->AddContact->addContactDetailsToDB($name, $email, $telephoneNo);
+
+
+        $data = array (
+            'datax' => $datax['name'],
+        );
+        
+        var_dump($data);
+
+        // header('Content-Type:application/json;charset=UTF-8');
+
+        // $this->load->view('todoJSON', $data);
+
         // echo json_encode($data);
     }
 

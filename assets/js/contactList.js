@@ -1,15 +1,19 @@
-// console.log(baseUrl);
+var contactsArray;
 
 $(document).ready(function () {
-
     function fetch_data() {
-        $.ajax({
-            method: "GET",
-            url: baseUrl + "index.php/ContactListController/contacts",
-            dataType: "JSON",
-            cache: false,
+        var Contact = Backbone.Model.extend({
+            urlRoot: baseUrl + "index.php/ContactListController/contacts",
+            idAttribute: 'id',
+        });
+
+        var c = new Contact();
+
+        c.fetch({
+            async: false,
             success: function (data) {
-                console.log(data.contacts);
+                console.log(data.attributes.contacts);
+                contactsArray = data.attributes.contacts;
             }
         });
     }
@@ -20,74 +24,82 @@ $(document).ready(function () {
         $('#user_form')[0].reset();
         $('.modal-title').text("Add Contact");
         $('#action').val('Add');
-        $('#data_action').val("Insert");
         $('#userModal').modal('show');
-
-
-
-        // $.ajax({
-        //     method: "POST",
-        //     url: baseUrl + "index.php/ContactListController/contact",
-        //     dataType: "JSON",
-        //     cache: false,
-        //     data: {
-        //         name: 'Clark Kent',
-        //         email: 'anjala@email.com',
-        //         telephoneNo: '0711234565'
-        //     },
-        //     success: function (data) {
-        //         console.log(data.response);
-        //     }
-        // });
-        // return false;
-
     });
 
-
-
     $('#action').click(function () {
-        var name = $("input#name").val();
-        var address = $("input#emai_address").val();
-        var telephoneNo = $("input#telephone_no").val();
+        if ($('#action').val() == 'Add') {
+            addContact();
+        } else if ($('#action').val() == 'Edit') {
+            editContact();
+        }
+    });
+});
 
-        if (!(name == "" || address == "" || telephoneNo == "")) {
-            $.ajax({
-                method: "POST",
-                url: baseUrl + "index.php/ContactListController/contact",
-                dataType: "JSON",
-                cache: false,
-                data: {
-                    name: name,
-                    email: address,
-                    telephoneNo: telephoneNo
-                },
+function editContactPopUp(id) {
+    var userName;
+    var email;
+    var telephoneNo;
+    for (i = 0; i < contactsArray.length; i++) {
+
+        if (contactsArray[i].contactId == id) {
+            userName = contactsArray[i].contactName;
+            email = contactsArray[i].contactEmail;
+            telephoneNo = contactsArray[i].contactTelephoneNo;
+        }
+        $('#user_form')[0].reset();
+        $('.modal-title').text("Edit Contact");
+        $("input#name").val(userName);
+        $("input#email_address").val(email);
+        $("input#telephone_no").val(telephoneNo);
+        $('#action').val('Edit');
+        $('#userModal').modal('show');
+    }
+}
+
+function addContact() {
+    var name = $("input#name").val();
+    var email = $("input#email_address").val();
+    var telephoneNo = parseInt($("input#telephone_no").val());
+
+    console.log(telephoneNo);
+
+    if (!(name == "" || email == "" || telephoneNo == "")) {
+        if (Number.isInteger(telephoneNo)) {
+            var Contact = Backbone.Model.extend({
+                urlRoot: baseUrl + "index.php/ContactListController/addContact",
+                idAttribute: 'id',
+            });
+
+            var c = new Contact();
+
+            var contactDetails = {
+                'name': name,
+                'email': email,
+                'telephoneNo': telephoneNo
+            }
+
+            c.save(contactDetails, {
+                async: false,
                 success: function (data) {
-                    console.log(data.response);
+                    console.log(data);
                     $('#user_form')[0].reset();
-                    $('#message').html(data.response);
+                    $('#message').html(data.attributes.response);
                     $('#message').show().fadeOut(4000);
                 }
             });
-            return false;
+        } else {
+            $('#message').html('Your telephone number is wrong');
+            $('#message').show().fadeOut(4000);
         }
-    });
+    } else {
+        $('#message').html('Fields are empty');
+        $('#message').show().fadeOut(4000);
+    }
+}
 
-    // $("#addContact").click(function () {
-    //     event.preventDefault();
-    //     $.ajax({
-    //         method: "POST",
-    //         url: baseUrl + "index.php/ContactListController/contact",
-    //         dataType: "JSON",
-    //         cache: false,
-    //         data: {
-    //             name: 'Clark Kent',
-    //             email: 'anjala@email.com',
-    //             telephoneNo: '0711234565'
-    //         },
-    //         success: function (data) {
-    //             console.log(data.response);
-    //         }
-    //     });
-    //     return false;
-    // });
-});
+function editContact() {
+    var name = $("input#name").val();
+    var email = $("input#email_address").val();
+    var telephoneNo = parseInt($("input#telephone_no").val());
+}

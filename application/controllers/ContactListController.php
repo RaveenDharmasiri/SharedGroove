@@ -20,27 +20,22 @@ class ContactListController extends REST_Controller
         echo json_encode($allContacts);
     }
 
-    public function contact_post()
+    public function addContact_post()
     {
-        $name = $this->input->post('name');
-        $email = $this->input->post('email');
-        $telephoneNo = $this->input->post('telephoneNo');
+        $datax = json_decode(file_get_contents('php://input'), true);
+
+        $name = $datax['name'];
+        $email = $datax['email'];
+        $telephoneNo = $datax['telephoneNo'];
+
 
         $this->load->model('ContactListPageServices/AddContact');
         $response = $this->AddContact->addContactDetailsToDB($name, $email, $telephoneNo);
 
-        $data = array (
+        $data = array(
             'response' => $response,
         );
 
         echo json_encode($data);
-
-        // $data = array(
-        //     'firstName' => $firstName,
-        //     'lastName' => $lastName,
-        //     'email' => $email,
-        //     'telephoneNo' => $telephoneNo
-        // );
-        // echo json_encode($data);
     }
 }

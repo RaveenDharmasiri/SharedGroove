@@ -60,17 +60,14 @@ function editContactPopUp(id) {
 
             for (y = 0; y < contactsArray[i].contactTags.length; y++) {
                 if (contactsArray[i].contactTags[y] == 'Friends') {
-                    console.log('Friends');
                     $('input[name="tag1"]').attr('checked', true);
                 }
 
                 if (contactsArray[i].contactTags[y] == 'Work') {
-                    console.log('Work');
                     $('input[name="tag2"]').attr('checked', true);
                 }
 
                 if (contactsArray[i].contactTags[y] == 'Family') {
-                    console.log('Family');
                     $('input[name="tag3"]').attr('checked', true);
                 }
             }
@@ -105,10 +102,6 @@ function addContact() {
     if ($('input[name="tag3"]:checked').length > 0) {
         isFamilyChecked = 'Family';
     }
-
-    console.log(isFriendChecked);
-    console.log(isWorkChecked);
-    console.log(isFamilyChecked);
 
     if (!(name == "" || email == "" || telephoneNo == "")) {
         if (isFriendChecked == null && isWorkChecked == null && isFamilyChecked == null) {
@@ -168,23 +161,16 @@ function editContact() {
     var isFamilyChecked = null;
 
     if ($('input[name="tag1"]:checked').length > 0) {
-        console.log('Friends is checked');
         isFriendChecked = 'Friends';
     }
 
     if ($('input[name="tag2"]:checked').length > 0) {
-        console.log('Work is checked');
         isWorkChecked = 'Work';
     }
 
     if ($('input[name="tag3"]:checked').length > 0) {
-        console.log('Family is checked');
         isFamilyChecked = 'Family';
     }
-
-    console.log(isFriendChecked);
-    console.log(isWorkChecked);
-    console.log(isFamilyChecked);
 
     if (!(name == "" || email == "" || telephoneNo == "")) {
         if (isFriendChecked == null && isWorkChecked == null && isFamilyChecked == null) {
@@ -215,7 +201,6 @@ function editContact() {
                     async: false,
                     success: function(data) {
                         fetch_data();
-                        console.log('This is the success');
                         console.log(data);
                         $('#message').html(data.attributes.response);
                         $('#message').show().fadeOut(4000);

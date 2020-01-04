@@ -27,10 +27,33 @@ class ContactListController extends REST_Controller
         $name = $datax['name'];
         $email = $datax['email'];
         $telephoneNo = $datax['telephoneNo'];
+        $tags = $datax['tags'];
 
 
         $this->load->model('ContactListPageServices/AddContact');
-        $response = $this->AddContact->addContactDetailsToDB($name, $email, $telephoneNo);
+        $response = $this->AddContact->addContactDetailsToDB($name, $email, $telephoneNo, $tags);
+
+        $data = array(
+            'response' => $response,
+        );
+
+        echo json_encode($data);
+    }
+
+    public function editContact_post() {
+
+        $response = 'Failed to update the contact';
+
+        $datax = json_decode(file_get_contents('php://input'), true);
+
+        $contactId = $datax['contactId'];
+        $name = $datax['name'];
+        $email = $datax['email'];
+        $telephoneNo = $datax['telephoneNo'];
+        $tags = $datax['tags'];
+
+        $this->load->model('ContactListPageServices/UpdateContact');
+        $response = $this->UpdateContact->editContact($contactId, $name, $email, $telephoneNo, $tags);
 
         $data = array(
             'response' => $response,

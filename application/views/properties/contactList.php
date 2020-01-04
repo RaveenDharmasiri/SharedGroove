@@ -59,30 +59,27 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td id="contactId">1</td>
                             <td>Raveen Dharmasiri</td>
                             <td>0711090637</td>
                             <td>raveen.dharmasiri@gmail.com</td>
                             <td>Friend, Work</td>
-                            <td><input type="button" onclick="editContactPopUp(1)" value="Edit" /></td>
+                            <td><input type="button" onclick="editContactPopUp(28)" value="Edit" /></td>
                             <td><button>Delete</button></td>
                         </tr>
                         <tr>
-                            <td id="contactId">2</td>
                             <td>Raveen Dharmasiri</td>
                             <td>0711090637</td>
                             <td>raveen.dharmasiri@gmail.com</td>
                             <td>Friend, Work</td>
-                            <td><input type="button" onclick="editContactPopUp(24)" value="Edit" /></td>
+                            <td><input type="button" onclick="editContactPopUp(31)" value="Edit" /></td>
                             <td><button>Delete</button></td>
                         </tr>
                         <tr>
-                            <td id="contactId">3</td>
                             <td>Raveen Dharmasiri</td>
                             <td>0711090637</td>
                             <td>raveen.dharmasiri@gmail.com</td>
                             <td>Friend, Work</td>
-                            <td><input type="button" onclick="editContactPopUp(3)" value="Edit" /></td>
+                            <td><input type="button" onclick="editContactPopUp(29)" value="Edit" /></td>
                             <td><button>Delete</button></td>
                         </tr>
                     </tbody>
@@ -117,6 +114,13 @@
                     <input type="text" name="telephone_no" id="telephone_no" class="form-control" required>
                     <span id="telephone_no_error" class="text-danger"></span>
                     <br />
+                </div>
+                <div>
+                    <label>Select the contact tag or tags</label>
+                    <br>
+                    <input type="checkbox" name="tag1" value="Friend"> Friends<br>
+                    <input type="checkbox" name="tag2" value="Work"> Work<br>
+                    <input type="checkbox" name="tag3" value="Family"> Family<br><br>
                 </div>
                 <div class="modal-footer">
                     <input type="button" name="action" id="action" class="btn btn-success" value="Add" />

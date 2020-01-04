@@ -25,23 +25,43 @@ class GetContacts extends CI_Model
                 $contactObj->setName($contact->contactName);
                 $contactObj->setEmail($contact->contactEmail);
                 $contactObj->setTelephoneNo($contact->contactTelephoneNo);
+                $contactTags =  $this->getContactTags($contact->contactId);
+                $contactObj->setTags($contactTags);
 
                 array_push($contactList, $contactObj);
             }
             return $this->configReturnObject($contactList);
         } else {
             return null;
-        }   
+        }
     }
 
-    public function configReturnObject($contactList) {
+    public function getContactTags($contactId)
+    {
+        $contactTags = array();
+        $this->db->select('*');
+        $this->db->from('ContactTag');
+        $this->db->where('contactId', $contactId);
+
+        $query = $this->db->get();
+
+        foreach($query->result() as $contactTag){
+            array_push($contactTags, $contactTag->tagType);
+        }
+
+        return $contactTags;
+    }
+
+    public function configReturnObject($contactList)
+    {
         $contactArray = array();
-        foreach($contactList as $contactObj) {
-            $contactDetails = array (
+        foreach ($contactList as $contactObj) {
+            $contactDetails = array(
                 'contactId' => $contactObj->getContactId(),
                 'contactName' => $contactObj->getName(),
                 'contactEmail' => $contactObj->getEmail(),
                 'contactTelephoneNo' => $contactObj->getTelephoneNo(),
+                'contactTags'=>$contactObj->getTags()
             );
 
             array_push($contactArray, $contactDetails);

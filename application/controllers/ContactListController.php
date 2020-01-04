@@ -41,9 +41,6 @@ class ContactListController extends REST_Controller
     }
 
     public function editContact_post() {
-
-        $response = 'Failed to update the contact';
-
         $datax = json_decode(file_get_contents('php://input'), true);
 
         $contactId = $datax['contactId'];

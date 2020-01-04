@@ -106,7 +106,7 @@ function addContact() {
     if (!(name == "" || email == "" || telephoneNo == "")) {
         if (isFriendChecked == null && isWorkChecked == null && isFamilyChecked == null) {
             $('#message').html('Please add tags for the contact');
-            $('#message').show().fadeOut(4000);
+            $('#message').show().fadeOut(2000);
         } else {
             if (Number.isInteger(telephoneNo)) {
                 var Contact = Backbone.Model.extend({
@@ -134,7 +134,7 @@ function addContact() {
                         console.log(data);
                         $('#user_form')[0].reset();
                         $('#message').html(data.attributes.response);
-                        $('#message').show().fadeOut(4000);
+                        $('#message').show().fadeOut(2000);
                     },
                     error: function(err) {
                         console.log(err);
@@ -142,12 +142,12 @@ function addContact() {
                 });
             } else {
                 $('#message').html('Your telephone number is wrong');
-                $('#message').show().fadeOut(4000);
+                $('#message').show().fadeOut(2000);
             }
         }
     } else {
         $('#message').html('Fields are empty');
-        $('#message').show().fadeOut(4000);
+        $('#message').show().fadeOut(2000);
     }
 }
 
@@ -175,7 +175,7 @@ function editContact() {
     if (!(name == "" || email == "" || telephoneNo == "")) {
         if (isFriendChecked == null && isWorkChecked == null && isFamilyChecked == null) {
             $('#message').html('Please add tags for the contact');
-            $('#message').show().fadeOut(4000);
+            $('#message').show().fadeOut(2000);
         } else {
             if (Number.isInteger(telephoneNo)) {
                 var Contact = Backbone.Model.extend({
@@ -203,7 +203,7 @@ function editContact() {
                         fetch_data();
                         console.log(data);
                         $('#message').html(data.attributes.response);
-                        $('#message').show().fadeOut(4000);
+                        $('#message').show().fadeOut(2000);
                     },
                     error: function(error) {
                         console.log(error);
@@ -213,11 +213,11 @@ function editContact() {
                 });
             } else {
                 $('#message').html('Your telephone number is wrong');
-                $('#message').show().fadeOut(4000);
+                $('#message').show().fadeOut(2000);
             }
         }
     } else {
         $('#message').html('Fields are empty');
-        $('#message').show().fadeOut(4000);
+        $('#message').show().fadeOut(2000);
     }
 }

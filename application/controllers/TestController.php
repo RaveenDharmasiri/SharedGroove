@@ -49,8 +49,8 @@ class TestController extends CI_Controller {
         $telephoneNo = 961234564;
         $tags = array(
             'friends'=> 'Friends',
-            'work'=> null,
-            'family'=>'Family'
+            'work'=> 'Work',
+            'family'=>null
         );
 
         $this->load->model('ContactListPageServices/UpdateContact');
@@ -60,7 +60,9 @@ class TestController extends CI_Controller {
             'response' => $response,
         );
 
-        echo json_encode($data);
+        var_dump($data);
+
+        // echo json_encode($data);
     }
 
 }

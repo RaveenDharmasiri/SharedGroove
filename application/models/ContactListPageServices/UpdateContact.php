@@ -121,8 +121,6 @@ class UpdateContact extends CI_Model
             $this->db->where($array);
             $query = $this->db->get();
 
-            var_dump($query->num_rows());
-
             if ($query->num_rows() < 1) {
                 $contactTag = array(
                     'tagType' => $tags['family'],

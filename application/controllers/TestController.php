@@ -37,4 +37,30 @@ class TestController extends CI_Controller {
         // echo json_encode($data);
     }
 
+    public function editContact() {
+
+        $response = 'Failed to update the contact';
+
+        // $datax = json_decode(file_get_contents('php://input'), true);
+
+        $contactId = 31;
+        $name = 'Anjula Ratnayaka';
+        $email = 'anjula@email.com';
+        $telephoneNo = 961234564;
+        $tags = array(
+            'friends'=> 'Friends',
+            'work'=> null,
+            'family'=>'Family'
+        );
+
+        $this->load->model('ContactListPageServices/UpdateContact');
+        $response = $this->UpdateContact->editContact($contactId, $name, $email, $telephoneNo, $tags);
+
+        $data = array(
+            'response' => $response,
+        );
+
+        echo json_encode($data);
+    }
+
 }

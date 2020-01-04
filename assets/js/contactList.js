@@ -3,17 +3,20 @@ var editingContactId;
 
 var UserContact = Backbone.Model.extend();
 
-$(document).ready(function () {
+$(document).ready(function() {
     fetch_data();
 
-    $('#add_button').click(function () {
+    $('#add_button').click(function() {
+        $('input[name="tag1"]').attr('checked', false);
+        $('input[name="tag2"]').attr('checked', false);
+        $('input[name="tag3"]').attr('checked', false);
         $('#user_form')[0].reset();
         $('.modal-title').text("Add Contact");
         $('#action').val('Add');
         $('#userModal').modal('show');
     });
 
-    $('#action').click(function () {
+    $('#action').click(function() {
         if ($('#action').val() == 'Add') {
             addContact();
         } else if ($('#action').val() == 'Edit') {
@@ -32,7 +35,7 @@ function fetch_data() {
 
     c.fetch({
         async: false,
-        success: function (data) {
+        success: function(data) {
             console.log(data.attributes.contacts);
             contactsArray = data.attributes.contacts;
         }
@@ -40,6 +43,9 @@ function fetch_data() {
 }
 
 function editContactPopUp(id) {
+    $('input[name="tag1"]').attr('checked', false);
+    $('input[name="tag2"]').attr('checked', false);
+    $('input[name="tag3"]').attr('checked', false);
     var userName;
     var email;
     var telephoneNo;
@@ -54,16 +60,18 @@ function editContactPopUp(id) {
 
             for (y = 0; y < contactsArray[i].contactTags.length; y++) {
                 if (contactsArray[i].contactTags[y] == 'Friends') {
-                    console.log('Hello world');
-                    $('input[name="tag1"]').attr('checked', 'checked');
+                    console.log('Friends');
+                    $('input[name="tag1"]').attr('checked', true);
                 }
 
                 if (contactsArray[i].contactTags[y] == 'Work') {
-                    $('input[name="tag2"]').attr('checked', 'checked');
+                    console.log('Work');
+                    $('input[name="tag2"]').attr('checked', true);
                 }
 
                 if (contactsArray[i].contactTags[y] == 'Family') {
-                    $('input[name="tag3"]').attr('checked', 'checked');
+                    console.log('Family');
+                    $('input[name="tag3"]').attr('checked', true);
                 }
             }
         }
@@ -128,14 +136,14 @@ function addContact() {
 
                 c.save(contactDetails, {
                     async: false,
-                    success: function (data) {
+                    success: function(data) {
                         fetch_data();
                         console.log(data);
                         $('#user_form')[0].reset();
                         $('#message').html(data.attributes.response);
                         $('#message').show().fadeOut(4000);
                     },
-                    error: function (err) {
+                    error: function(err) {
                         console.log(err);
                     }
                 });
@@ -160,14 +168,17 @@ function editContact() {
     var isFamilyChecked = null;
 
     if ($('input[name="tag1"]:checked').length > 0) {
+        console.log('Friends is checked');
         isFriendChecked = 'Friends';
     }
 
     if ($('input[name="tag2"]:checked').length > 0) {
+        console.log('Work is checked');
         isWorkChecked = 'Work';
     }
 
     if ($('input[name="tag3"]:checked').length > 0) {
+        console.log('Family is checked');
         isFamilyChecked = 'Family';
     }
 
@@ -202,14 +213,14 @@ function editContact() {
 
                 c.save(editContactDetails, {
                     async: false,
-                    success: function (data) {
+                    success: function(data) {
                         fetch_data();
+                        console.log('This is the success');
                         console.log(data);
-                        $('#user_form')[0].reset();
                         $('#message').html(data.attributes.response);
                         $('#message').show().fadeOut(4000);
                     },
-                    error: function (error) {
+                    error: function(error) {
                         console.log(error);
                         $('#message').html('Failed to update the contact');
                         $('#message').show().fadeOut(4000);

@@ -12,23 +12,23 @@ class UpdateContact extends CI_Model
     {
 
         $array = array(
-            'contactId' => $contactId,
             'contactName' => $name,
             'contactEmail' => $email,
             'contactTelephoneNo' => $telephoneNo
         );
 
-        $this->db->replace('Contact', $array);
+        $this->db->where('contactId', $contactId);
+        $this->db->update('Contact', $array);
+
+        $this->updateTags($contactId, $tags);
 
         return 'Updated the contact';
     }
 
     public function updateTags($contactId, $tags)
     {
-
         // Updating contacts friends tag - start
         if (!$tags['friends'] == null) {
-
             $array = array(
                 'tagType' => $tags['friends'],
                 'contactId' => $contactId
@@ -39,7 +39,7 @@ class UpdateContact extends CI_Model
             $this->db->where($array);
             $query = $this->db->get();
 
-            if ($query->num_rows() < 0) {
+            if ($query->num_rows() < 1) {
                 $contactTag = array(
                     'tagType' => $tags['friends'],
                     'contactId' => $contactId,
@@ -49,7 +49,7 @@ class UpdateContact extends CI_Model
             }
         } else {
             $array = array(
-                'tagType' => $tags['friends'],
+                'tagType' => 'Friends',
                 'contactId' => $contactId
             );
 
@@ -59,12 +59,7 @@ class UpdateContact extends CI_Model
             $query = $this->db->get();
 
             if ($query->num_rows() > 0) {
-                $contactTag = array(
-                    'tagType' => $tags['friends'],
-                    'contactId' => $contactId,
-                );
-
-                $this->db->where($contactTag);
+                $this->db->where('contactTagId', $query->row_array()["contactTagId"]);
                 $this->db->delete('ContactTag');
             }
         }
@@ -85,7 +80,7 @@ class UpdateContact extends CI_Model
             $this->db->where($array);
             $query = $this->db->get();
 
-            if ($query->num_rows() < 0) {
+            if ($query->num_rows() < 1) {
                 $contactTag = array(
                     'tagType' => $tags['work'],
                     'contactId' => $contactId,
@@ -94,8 +89,9 @@ class UpdateContact extends CI_Model
                 $this->db->insert('ContactTag', $contactTag);
             }
         } else {
+
             $array = array(
-                'tagType' => $tags['work'],
+                'tagType' => 'Work',
                 'contactId' => $contactId
             );
 
@@ -105,12 +101,7 @@ class UpdateContact extends CI_Model
             $query = $this->db->get();
 
             if ($query->num_rows() > 0) {
-                $contactTag = array(
-                    'tagType' => $tags['work'],
-                    'contactId' => $contactId,
-                );
-
-                $this->db->where($contactTag);
+                $this->db->where('contactTagId', $query->row_array()["contactTagId"]);
                 $this->db->delete('ContactTag');
             }
         }
@@ -130,7 +121,9 @@ class UpdateContact extends CI_Model
             $this->db->where($array);
             $query = $this->db->get();
 
-            if ($query->num_rows() < 0) {
+            var_dump($query->num_rows());
+
+            if ($query->num_rows() < 1) {
                 $contactTag = array(
                     'tagType' => $tags['family'],
                     'contactId' => $contactId,
@@ -140,7 +133,7 @@ class UpdateContact extends CI_Model
             }
         } else {
             $array = array(
-                'tagType' => $tags['family'],
+                'tagType' => 'Family',
                 'contactId' => $contactId
             );
 
@@ -150,12 +143,7 @@ class UpdateContact extends CI_Model
             $query = $this->db->get();
 
             if ($query->num_rows() > 0) {
-                $contactTag = array(
-                    'tagType' => $tags['family'],
-                    'contactId' => $contactId,
-                );
-
-                $this->db->where($contactTag);
+                $this->db->where('contactTagId', $query->row_array()["contactTagId"]);
                 $this->db->delete('ContactTag');
             }
         }

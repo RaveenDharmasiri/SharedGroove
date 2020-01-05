@@ -65,4 +65,20 @@ class TestController extends CI_Controller {
         // echo json_encode($data);
     }
 
+    public function deleteContact() {
+        // $datax = json_decode(file_get_contents('php://input'), true);
+
+        $contactId = 28;
+
+        $this->load->model('ContactListPageServices/DeleteContact');
+        $response = $this->DeleteContact->removeContact($contactId);
+
+        $data = array(
+            'response' => $response,
+        );
+
+        echo json_encode($data);
+
+    } 
+
 }

@@ -58,4 +58,20 @@ class ContactListController extends REST_Controller
 
         echo json_encode($data);
     }
+
+    public function deleteContact_delete() {
+        $datax = json_decode(file_get_contents('php://input'), true);
+
+        $contactId = $datax['contactId'];
+
+        // $this->load->model('ContactListPageServices/DeleteContact');
+        // $response = $this->DeleteContact->removeContact($contactId);
+
+        $data = array(
+            'response' => $contactId,
+        );
+
+        echo json_encode($data);
+
+    } 
 }

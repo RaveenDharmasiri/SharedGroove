@@ -1,12 +1,12 @@
 var contactsArray;
 var editingContactId;
+var deletingContactId;
+var userModel;
 
 var restApiCall = new app.RestApiCall();
 
 
 var contactList = new app.ContactsCollection();
-
-
 
 $(document).ready(function() {
 
@@ -25,9 +25,14 @@ $(document).ready(function() {
     $('#action').click(function() {
         if ($('#action').val() == 'Add') {
             addContact();
-        } else if ($('#action').val() == 'Edit') {
+        }
+        if ($('#action').val() == 'Edit') {
             editContact();
         }
+    });
+
+    $('#action-delete-contact').click(function() {
+        deleteContact();
     });
 });
 
@@ -51,7 +56,8 @@ function fetch_data() {
                     contactName: contactsArray[i].contactName,
                     contactEmail: contactsArray[i].contactEmail,
                     contactTelephoneNo: contactsArray[i].contactTelephoneNo,
-                    contactTags: tags
+                    contactTags: tags,
+
                 });
 
                 contactList.add(contact);
@@ -148,7 +154,6 @@ function addContact() {
 
 
 
-
                 restApiCall.save(contactDetails, {
                     async: false,
                     success: function(data) {
@@ -212,10 +217,6 @@ function editContact() {
                     }
                 }
 
-                // restApiCall.set('urlRoot', baseUrl + "index.php/ContactListController/contacts/" + editingContactId);
-
-                console.log('this' + restApiCall);
-
                 restApiCall.save(editContactDetails, {
                     type: 'PUT',
                     async: false,
@@ -240,4 +241,27 @@ function editContact() {
         $('#message').html('Fields are empty');
         $('#message').show().fadeOut(2000);
     }
+}
+
+function deleteContact() {
+    console.log('deleting contact ' + userModel.get('contactId'));
+
+    // var deletingContactDetails = {
+    //     'contactId': deletingContactId
+    // }
+    userModel.destroy({
+        contentType: 'application/json',
+        data: JSON.stringify({ contactId: userModel.get('contactId') }),
+        success: function(data) {
+            // fetch_data();
+            console.log(data);
+            $('#delete-message').html(data.attributes.response);
+            $('#delete-message').show().fadeOut(2000);
+        },
+        error: function(error) {
+            console.log(error);
+            $('#delete-message').html('Failed to delete the contact');
+            $('#delete-message').show().fadeOut(4000);
+        }
+    });
 }

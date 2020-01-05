@@ -10,6 +10,7 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script> -->
+    
 
     <script src="<?php echo base_url('assets/js/libs/underscore.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/libs/backbone.js'); ?>"></script>
@@ -68,15 +69,14 @@
         </div>
     </div>
 
-    <a href="<?php echo site_url('TestController/contact_post') ?>">Add Contact</a>
 
     <script id="contactElement" type="text/template">
         <td><%= contactName %></td>
         <td><%= contactEmail %></td>
         <td><%= contactTelephoneNo %></td>
         <td><%= contactTags %></td>
-        <td><input type="button" onclick="editContactPopUp(<%= contactId %>)" value="Edit" /></td>
-        <td><input type="button" onclick="deleteContactPopUp(<%= contactId %>)" value="Delete" /></td>
+        <td><input type="button" class="btn-edit" onclick="editContactPopUp(<%= contactId %>)" value="Edit" /></td>
+        <td><input type="button" class="btn-delete" value="Delete" /></td>
     </script>
 </body>
 

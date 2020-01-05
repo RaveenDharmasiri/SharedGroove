@@ -20,7 +20,7 @@ class ContactListController extends REST_Controller
         echo json_encode($allContacts);
     }
 
-    public function addContact_post()
+    public function contacts_post()
     {
         $datax = json_decode(file_get_contents('php://input'), true);
 
@@ -40,7 +40,7 @@ class ContactListController extends REST_Controller
         echo json_encode($data);
     }
 
-    public function editContact_post() {
+    public function contacts_put() {
         $datax = json_decode(file_get_contents('php://input'), true);
 
         $contactId = $datax['contactId'];

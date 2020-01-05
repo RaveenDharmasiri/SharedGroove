@@ -1,9 +1,15 @@
 var contactsArray;
 var editingContactId;
 
-var UserContact = Backbone.Model.extend();
+var restApiCall = new app.RestApiCall();
+
+
+var contactList = new app.ContactsCollection();
+
+
 
 $(document).ready(function() {
+
     fetch_data();
 
     $('#add_button').click(function() {
@@ -26,21 +32,41 @@ $(document).ready(function() {
 });
 
 function fetch_data() {
-    var Contact = Backbone.Model.extend({
-        urlRoot: baseUrl + "index.php/ContactListController/contacts",
-        idAttribute: 'id',
-    });
-
-    var c = new Contact();
-
-    c.fetch({
+    contactList.reset();
+    restApiCall.fetch({
         async: false,
         success: function(data) {
             console.log(data.attributes.contacts);
             contactsArray = data.attributes.contacts;
+
+            for (i = 0; i < contactsArray.length; i++) {
+                var tags = '';
+
+                for (y = 0; y < contactsArray[i].contactTags.length; y++) {
+                    tags += contactsArray[i].contactTags[y] + " ,";
+                }
+
+                var contact = new app.SingleContact({
+                    contactId: contactsArray[i].contactId,
+                    contactName: contactsArray[i].contactName,
+                    contactEmail: contactsArray[i].contactEmail,
+                    contactTelephoneNo: contactsArray[i].contactTelephoneNo,
+                    contactTags: tags
+                });
+
+                contactList.add(contact);
+            }
+
+            var contactsListView = new app.AllContactsView({ model: contactList });
+
+            $("#contact-table").html(contactsListView.render().el);
+
+            $('#contact-table').append("<thead><tr><th>Name</th><th>Telephone No</th><th>Email</th><th>Tags</th><th>Edit</th><th>Delete</th></tr></thead>");
         }
     });
 }
+
+
 
 function editContactPopUp(id) {
     $('input[name="tag1"]').attr('checked', false);
@@ -109,13 +135,6 @@ function addContact() {
             $('#message').show().fadeOut(2000);
         } else {
             if (Number.isInteger(telephoneNo)) {
-                var Contact = Backbone.Model.extend({
-                    urlRoot: baseUrl + "index.php/ContactListController/addContact",
-                    idAttribute: 'id',
-                });
-
-                var c = new Contact();
-
                 var contactDetails = {
                     'name': name,
                     'email': email,
@@ -127,7 +146,10 @@ function addContact() {
                     }
                 }
 
-                c.save(contactDetails, {
+
+
+
+                restApiCall.save(contactDetails, {
                     async: false,
                     success: function(data) {
                         fetch_data();
@@ -178,13 +200,6 @@ function editContact() {
             $('#message').show().fadeOut(2000);
         } else {
             if (Number.isInteger(telephoneNo)) {
-                var Contact = Backbone.Model.extend({
-                    urlRoot: baseUrl + "index.php/ContactListController/editContact",
-                    idAttribute: 'id',
-                });
-
-                var c = new Contact();
-
                 var editContactDetails = {
                     'contactId': editingContactId,
                     'name': name,
@@ -197,7 +212,12 @@ function editContact() {
                     }
                 }
 
-                c.save(editContactDetails, {
+                // restApiCall.set('urlRoot', baseUrl + "index.php/ContactListController/contacts/" + editingContactId);
+
+                console.log('this' + restApiCall);
+
+                restApiCall.save(editContactDetails, {
+                    type: 'PUT',
                     async: false,
                     success: function(data) {
                         fetch_data();

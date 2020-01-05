@@ -64,7 +64,7 @@
                             <td>raveen.dharmasiri@gmail.com</td>
                             <td>Friend, Work</td>
                             <td><input type="button" onclick="editContactPopUp(28)" value="Edit" /></td>
-                            <td><button>Delete</button></td>
+                            <td><input type="button" onclick="deleteContactPopUp(28)" value="Delete" /></td>
                         </tr>
                         <tr>
                             <td>Raveen Dharmasiri</td>
@@ -72,7 +72,7 @@
                             <td>raveen.dharmasiri@gmail.com</td>
                             <td>Friend, Work</td>
                             <td><input type="button" onclick="editContactPopUp(31)" value="Edit" /></td>
-                            <td><button>Delete</button></td>
+                            <td><input type="button" onclick="deleteContactPopUp(31)" value="Delete" /></td>
                         </tr>
                         <tr>
                             <td>Raveen Dharmasiri</td>
@@ -80,7 +80,7 @@
                             <td>raveen.dharmasiri@gmail.com</td>
                             <td>Friend, Work</td>
                             <td><input type="button" onclick="editContactPopUp(29)" value="Edit" /></td>
-                            <td><button>Delete</button></td>
+                            <td><input type="button" onclick="deleteContactPopUp(29)" value="Delete" /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -130,6 +130,26 @@
                 <p id="message" style="text-align:center;"></p>
             </div>
         </form>
+    </div>
+</div>
+
+<div id="deleteContact" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Deleting Contact</h4>
+            </div>
+            <div class="modal-body">
+                <label>Are you sure you want to delete this contact?</label>
+            </div>
+            <div class="modal-footer">
+                <input type="button" name="action" id="action-delete-contact" class="btn btn-success" value="Yes" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+
+            <p id="delete-message" style="text-align:center;"></p>
+        </div>
     </div>
 </div>
 

@@ -18,6 +18,12 @@
         var baseUrl = "<?php echo base_url() ?>"
     </script>
 
+    <script src="<?php echo base_url('assets/js/models/restApiCallModel.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/models/singleContactModel.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/views/singleContactView.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/views/allContactsView.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/collections/contactsCollection.js'); ?>"></script>
+
     <script src="<?php echo base_url('assets/js/contactList.js'); ?>"></script>
 
     <link rel="stylesheet" href="<?php echo base_url('assets/css/home.css'); ?>" />
@@ -46,7 +52,7 @@
             </div>
             <div class="panel-body">
                 <span id="success_message"></span>
-                <table class="table table-bordered table-striped">
+                <table id="contact-table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -57,38 +63,21 @@
                             <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Raveen Dharmasiri</td>
-                            <td>0711090637</td>
-                            <td>raveen.dharmasiri@gmail.com</td>
-                            <td>Friend, Work</td>
-                            <td><input type="button" onclick="editContactPopUp(28)" value="Edit" /></td>
-                            <td><input type="button" onclick="deleteContactPopUp(28)" value="Delete" /></td>
-                        </tr>
-                        <tr>
-                            <td>Raveen Dharmasiri</td>
-                            <td>0711090637</td>
-                            <td>raveen.dharmasiri@gmail.com</td>
-                            <td>Friend, Work</td>
-                            <td><input type="button" onclick="editContactPopUp(31)" value="Edit" /></td>
-                            <td><input type="button" onclick="deleteContactPopUp(31)" value="Delete" /></td>
-                        </tr>
-                        <tr>
-                            <td>Raveen Dharmasiri</td>
-                            <td>0711090637</td>
-                            <td>raveen.dharmasiri@gmail.com</td>
-                            <td>Friend, Work</td>
-                            <td><input type="button" onclick="editContactPopUp(29)" value="Edit" /></td>
-                            <td><input type="button" onclick="deleteContactPopUp(29)" value="Delete" /></td>
-                        </tr>
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 
     <a href="<?php echo site_url('TestController/contact_post') ?>">Add Contact</a>
+
+    <script id="contactElement" type="text/template">
+        <td><%= contactName %></td>
+        <td><%= contactEmail %></td>
+        <td><%= contactTelephoneNo %></td>
+        <td><%= contactTags %></td>
+        <td><input type="button" onclick="editContactPopUp(<%= contactId %>)" value="Edit" /></td>
+        <td><input type="button" onclick="deleteContactPopUp(<%= contactId %>)" value="Delete" /></td>
+    </script>
 </body>
 
 </html>

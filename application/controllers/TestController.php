@@ -43,12 +43,12 @@ class TestController extends CI_Controller {
 
         // $datax = json_decode(file_get_contents('php://input'), true);
 
-        $contactId = 31;
-        $name = 'Anjula Ratnayaka';
-        $email = 'anjula@email.com';
-        $telephoneNo = 961234564;
+        $contactId = 29;
+        $name = 'Raveen Dharmasiri';
+        $email = 'raveen.dharmasiri@gmail.com';
+        $telephoneNo = 711090637;
         $tags = array(
-            'friends'=> 'Friends',
+            'friends'=> null,
             'work'=> 'Work',
             'family'=>null
         );

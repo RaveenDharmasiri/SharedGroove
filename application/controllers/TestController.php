@@ -68,7 +68,7 @@ class TestController extends CI_Controller {
     public function deleteContact() {
         // $datax = json_decode(file_get_contents('php://input'), true);
 
-        $contactId = 28;
+        $contactId = 41;
 
         $this->load->model('ContactListPageServices/DeleteContact');
         $response = $this->DeleteContact->removeContact($contactId);

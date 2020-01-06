@@ -5,6 +5,34 @@ app.SingleContactView = Backbone.View.extend({
 
     tagName: "tr",
 
+    events: {
+        'click .btn-delete': "clicked",
+    },
+    clicked: function() {
+        //console.log(this);
+        // var catchID = (this.model.get('contactId'));
+        $('#deleteContact').modal('show');
+        userModel = this.model;
+
+        // this.model.destroy( //  this is DELETE method.
+        //     {
+        //         contentType: 'application/json',
+        //         data: JSON.stringify({ contactId: catchID }),
+        //         success: function(response) {
+        //             // console.log(contactGroup);
+        //             // populateView();
+        //             // contactGroup.remove(this.model);
+        //             console.log('This is the response' + response);
+        //             console.log(contactList);
+        //         },
+        //         error: function(err) {
+        //             console.log(contactGroup);
+        //             populateView();
+        //             console.log('Failed to delete contact!');
+        //         }
+        //     });
+    },
+
     render: function() {
         template = _.template($("#contactElement").html())
         var contactTemplate = template(this.model.toJSON());

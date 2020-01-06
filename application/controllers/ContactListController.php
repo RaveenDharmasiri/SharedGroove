@@ -14,10 +14,36 @@ class ContactListController extends REST_Controller
 
     public function contacts_get()
     {
-        $this->load->model('ContactListPageServices/GetContacts');
-        $allContacts = $this->GetContacts->getAllContacts();
+        $isSearch = $_GET['isSearch'];
 
-        echo json_encode($allContacts);
+        if ($isSearch == 'searchByName') {
+            $this->load->model('ContactListPageServices/SearchByName');
+            $searchContacts = $this->SearchByName->getContactIds($_GET['searchName']);
+
+            $data = array(
+                'response' => $searchContacts
+            );
+
+            echo json_encode($data);
+        } else if ($isSearch == 'searchByTags') {
+            $friends = $_GET['friends'] ;
+            $work = $_GET['work'];
+            $family = $_GET['family'];
+
+            $this->load->model('ContactListPageServices/SearchByTag');
+            $searchContacts = $this->SearchByTag->getContactIds($friends, $work, $family);
+
+            $data = array(
+                'response' => $searchContacts
+            );
+
+            echo json_encode($data);
+        } else {
+            $this->load->model('ContactListPageServices/GetContacts');
+            $allContacts = $this->GetContacts->getAllContacts();
+
+            echo json_encode($allContacts);
+        }
     }
 
     public function contacts_post()
@@ -40,7 +66,8 @@ class ContactListController extends REST_Controller
         echo json_encode($data);
     }
 
-    public function contacts_put() {
+    public function contacts_put()
+    {
         $datax = json_decode(file_get_contents('php://input'), true);
 
         $contactId = $datax['contactId'];
@@ -59,7 +86,8 @@ class ContactListController extends REST_Controller
         echo json_encode($data);
     }
 
-    public function contacts_delete() {
+    public function contacts_delete()
+    {
         $datax = json_decode(file_get_contents('php://input'), true);
 
         $contactId = $datax['contactId'];
@@ -72,5 +100,5 @@ class ContactListController extends REST_Controller
         );
 
         echo json_encode($data);
-    } 
+    }
 }

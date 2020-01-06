@@ -38,7 +38,7 @@
 
     <div class="container">
         <br />
-        <h3 align="center">Contacts</h3>
+        <h3 align="center">Contact Search Results</h3>
         <br />
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -47,8 +47,7 @@
                         <!-- <h3 class="panel-title">Contacts</h3> -->
                     </div>
                     <div class="col-md-6" align="right">
-                        <button type="button" id="load_all_contacts" class="btn btn-info btn-xs">Load All Contacts</button>
-                        <button type="button" id="search_contact" class="btn btn-info btn-xs">Search Contact</button>
+                        <button type="button" id="add_button" class="btn btn-info btn-xs">Search Contact</button>
                         <button type="button" id="add_button" class="btn btn-info btn-xs">Add Contact</button>
                     </div>
                 </div>
@@ -102,7 +101,7 @@
                     <span id="email_address_error" class="text-danger"></span>
                     <br />
                     <label>Enter Telephone Number</label>
-                    <input type="text" name="telephone_no" id="telephone_no" class="form-control" maxlength="10" required>
+                    <input type="text" name="telephone_no" id="telephone_no" class="form-control" required>
                     <span id="telephone_no_error" class="text-danger"></span>
                     <br />
                 </div>
@@ -143,133 +142,3 @@
         </div>
     </div>
 </div>
-
-<div id="searchContact" class="modal fade">
-    <div class="modal-dialog">
-        <form method="post" id="search_form">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add Contact</h4>
-                </div>
-                <div class="modal-body">
-                    <label>Search contacts by name</label>
-                    <input type="text" name="name" id="search-name" class="form-control" required>
-                    <span id="first_name_error" class="text-danger"></span>
-                    <br />
-                </div>
-                <div class="modal-body">
-                    <label>Search contacts by tags</label>
-                    <br>
-                    <input type="checkbox" name="tag1" value="Friend"> Friends<br>
-                    <input type="checkbox" name="tag2" value="Work"> Work<br>
-                    <input type="checkbox" name="tag3" value="Family"> Family<br><br>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" name="action" id="action-search-contact" class="btn btn-success" value="Search" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-
-                <p id="search-message" style="text-align:center;"></p>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- <script type="text/javascript" language="javascript">
-    $(document).ready(function() {
-
-        function fetch_data()
-        {
-            $.ajax({
-                url:"<?php echo base_url(); ?>test_api/action",
-                method:"POST",
-                data:{data_action:'fetch_all'},
-                success:function(data)
-                {
-                    $('tbody').html(data);
-                }
-            });
-        }
-
-        fetch_data();
-
-        $('#add_button').click(function() {
-            $('#user_form')[0].reset();
-            $('.modal-title').text("Add Contact");
-            $('#action').val('Add');
-            $('#data_action').val("Insert");
-            $('#userModal').modal('show');
-        });
-
-        $(document).on('submit', '#user_form', function(event){
-            event.preventDefault();
-            $.ajax({
-                url:"<?php echo base_url() . 'test_api/action' ?>",
-                method:"POST",
-                data:$(this).serialize(),
-                dataType:"json",
-                success:function(data)
-                {
-                    if(data.success)
-                    {
-                        $('#user_form')[0].reset();
-                        $('#userModal').modal('hide');
-                        fetch_data();
-                        if($('#data_action').val() == "Insert")
-                        {
-                            $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
-                        }
-                    }
-
-                    if(data.error)
-                    {
-                        $('#first_name_error').html(data.first_name_error);
-                        $('#last_name_error').html(data.last_name_error);
-                    }
-                }
-            })
-        });
-
-        $(document).on('click', '.edit', function(){
-            var user_id = $(this).attr('id');
-            $.ajax({
-                url:"<?php echo base_url(); ?>test_api/action",
-                method:"POST",
-                data:{user_id:user_id, data_action:'fetch_single'},
-                dataType:"json",
-                success:function(data)
-                {
-                    $('#userModal').modal('show');
-                    $('#first_name').val(data.first_name);
-                    $('#last_name').val(data.last_name);
-                    $('.modal-title').text('Edit User');
-                    $('#user_id').val(user_id);
-                    $('#action').val('Edit');
-                    $('#data_action').val('Edit');
-                }
-            })
-        });
-
-        $(document).on('click', '.delete', function(){
-            var user_id = $(this).attr('id');
-            if(confirm("Are you sure you want to delete this?"))
-            {
-                $.ajax({
-                    url:"<?php echo base_url(); ?>test_api/action",
-                    method:"POST",
-                    data:{user_id:user_id, data_action:'Delete'},
-                    dataType:"JSON",
-                    success:function(data)
-                    {
-                        if(data.success)
-                        {
-                            $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                            fetch_data();
-                        }
-                    }
-                })
-            }
-        });
-    });
-</script> -->

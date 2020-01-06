@@ -22,6 +22,20 @@ $(document).ready(function() {
         $('#userModal').modal('show');
     });
 
+    $('#search_contact').click(function() {
+        $('input[name="tag1"]').attr('checked', false);
+        $('input[name="tag2"]').attr('checked', false);
+        $('input[name="tag3"]').attr('checked', false);
+        $('#search_form')[0].reset();
+        $('.modal-title').text("Search Contact");
+        $('#searchContact').modal('show');
+    });
+
+
+    $('#load_all_contacts').click(function() {
+        fetch_data();
+    });
+
     $('#action').click(function() {
         if ($('#action').val() == 'Add') {
             addContact();
@@ -34,45 +48,54 @@ $(document).ready(function() {
     $('#action-delete-contact').click(function() {
         deleteContact();
     });
+
+    $('#action-search-contact').click(function() {
+        searchContact();
+    });
 });
 
 function fetch_data() {
-    contactList.reset();
     restApiCall.fetch({
+        data: {
+            'searchName': name,
+            'isSearch': 'all'
+        },
         async: false,
         success: function(data) {
             console.log(data.attributes.contacts);
             contactsArray = data.attributes.contacts;
-
-            for (i = 0; i < contactsArray.length; i++) {
-                var tags = '';
-
-                for (y = 0; y < contactsArray[i].contactTags.length; y++) {
-                    tags += contactsArray[i].contactTags[y] + " ,";
-                }
-
-                var contact = new app.SingleContact({
-                    contactId: contactsArray[i].contactId,
-                    contactName: contactsArray[i].contactName,
-                    contactEmail: contactsArray[i].contactEmail,
-                    contactTelephoneNo: contactsArray[i].contactTelephoneNo,
-                    contactTags: tags,
-
-                });
-
-                contactList.add(contact);
-            }
-
-            var contactsListView = new app.AllContactsView({ model: contactList });
-
-            $("#contact-table").html(contactsListView.render().el);
-
-            $('#contact-table').append("<thead><tr><th>Name</th><th>Telephone No</th><th>Email</th><th>Tags</th><th>Edit</th><th>Delete</th></tr></thead>");
+            renderContactOnTheView(contactsArray);
         }
     });
 }
 
+function renderContactOnTheView(contactsArray) {
+    contactList.reset();
+    for (i = 0; i < contactsArray.length; i++) {
+        var tags = '';
 
+        for (y = 0; y < contactsArray[i].contactTags.length; y++) {
+            tags += contactsArray[i].contactTags[y] + " ,";
+        }
+
+        var contact = new app.SingleContact({
+            contactId: contactsArray[i].contactId,
+            contactName: contactsArray[i].contactName,
+            contactEmail: contactsArray[i].contactEmail,
+            contactTelephoneNo: contactsArray[i].contactTelephoneNo,
+            contactTags: tags,
+
+        });
+
+        contactList.add(contact);
+    }
+
+    var contactsListView = new app.AllContactsView({ model: contactList });
+
+    $("#contact-table").html(contactsListView.render().el);
+
+    $('#contact-table').append("<thead><tr><th>Name</th><th>Telephone No</th><th>Email</th><th>Tags</th><th>Edit</th><th>Delete</th></tr></thead>");
+}
 
 function editContactPopUp(id) {
     $('input[name="tag1"]').attr('checked', false);
@@ -152,8 +175,6 @@ function addContact() {
                     }
                 }
 
-
-
                 restApiCall.save(contactDetails, {
                     async: false,
                     success: function(data) {
@@ -165,6 +186,8 @@ function addContact() {
                     },
                     error: function(err) {
                         console.log(err);
+                        $('#message').html('Failed to add new contact');
+                        $('#message').show().fadeOut(2000);
                     }
                 });
             } else {
@@ -244,24 +267,102 @@ function editContact() {
 }
 
 function deleteContact() {
-    console.log('deleting contact ' + userModel.get('contactId'));
-
-    // var deletingContactDetails = {
-    //     'contactId': deletingContactId
-    // }
     userModel.destroy({
         contentType: 'application/json',
         data: JSON.stringify({ contactId: userModel.get('contactId') }),
         success: function(data) {
-            // fetch_data();
+            fetch_data();
             console.log(data);
             $('#delete-message').html(data.attributes.response);
             $('#delete-message').show().fadeOut(2000);
         },
         error: function(error) {
-            console.log(error);
-            $('#delete-message').html('Failed to delete the contact');
-            $('#delete-message').show().fadeOut(4000);
+            fetch_data();
+            $('#delete-message').html('Deleted the contact');
+            $('#delete-message').show().fadeOut(2000);
         }
     });
+}
+
+function searchContact() {
+    var name = $("input#search-name").val();
+    var isFriendChecked = null;
+    var isWorkChecked = null;
+    var isFamilyChecked = null;
+
+    if ($('input[name="tag1"]:checked').length > 0) {
+        isFriendChecked = 'Friends';
+    }
+
+    if ($('input[name="tag2"]:checked').length > 0) {
+        isWorkChecked = 'Work';
+    }
+
+    if ($('input[name="tag3"]:checked').length > 0) {
+        isFamilyChecked = 'Family';
+    }
+
+    if (!name == "") {
+        restApiCall.fetch({
+            data: {
+                'searchName': name,
+                'isSearch': 'searchByName'
+            },
+            async: false,
+            success: function(data) {
+                if (data.attributes.response != null) {
+                    contactsSearchArray = data.attributes.response.contacts;
+                    renderContactOnTheView(contactsSearchArray);
+                    $('#search-message').html('Found Contact');
+                    $('#search-message').show().fadeOut(2000);
+                } else {
+                    $('#search-message').html('Sorry! Could not find any contacts');
+                    $('#search-message').show().fadeOut(2000);
+                }
+            },
+            error: function(error) {
+                $('#search-message').html('Sorry! Could not find any contacts');
+                $('#search-message').show().fadeOut(2000);
+            }
+        });
+    } else if (!(isFriendChecked == null && isWorkChecked == null && isFamilyChecked == null)) {
+        restApiCall.fetch({
+            data: {
+                'friends': isFriendChecked,
+                'work': isWorkChecked,
+                'family': isFamilyChecked,
+                'isSearch': 'searchByTags'
+            },
+            async: false,
+            success: function(data) {
+                const unique = (value, index, self) => {
+                    return self.indexOf(value) === index
+                }
+
+                tagSearchResults = data.attributes.response;
+
+                uniqueContactIds = tagSearchResults.filter(unique);
+
+                contactsSearchArray = [];
+
+                for (i = 0; i < uniqueContactIds.length; i++) {
+                    for (y = 0; y < contactsArray.length; y++) {
+                        if (uniqueContactIds[i] == contactsArray[y].contactId) {
+                            contactsSearchArray.push(contactsArray[y]);
+                        }
+                    }
+                }
+                renderContactOnTheView(contactsSearchArray);
+                $('#search-message').html('Found Contact');
+                $('#search-message').show().fadeOut(2000);
+            },
+            error: function(error) {
+                $('#search-message').html('Sorry! Could not find any contacts');
+                $('#search-message').show().fadeOut(2000);
+            }
+        });
+    } else {
+        $('#search-message').html('Please select a search method');
+        $('#search-message').show().fadeOut(2000);
+    }
 }

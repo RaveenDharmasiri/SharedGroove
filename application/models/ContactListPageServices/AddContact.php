@@ -33,7 +33,6 @@ class AddContact extends CI_Model
 
     public function userAlreadyExists($name, $email, $telephoneNo)
     {
-
         $array = array(
             'contactName' => $name,
             'contactEmail' => $email,

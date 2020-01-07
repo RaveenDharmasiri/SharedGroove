@@ -1,6 +1,5 @@
 var contactsArray;
 var editingContactId;
-var deletingContactId;
 var userModel;
 
 var restApiCall = new app.RestApiCall();

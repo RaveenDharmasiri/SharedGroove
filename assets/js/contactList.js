@@ -4,7 +4,6 @@ var userModel;
 
 var restApiCall = new app.RestApiCall();
 
-
 var contactList = new app.ContactsCollection();
 
 $(document).ready(function() {

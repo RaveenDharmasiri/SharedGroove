@@ -82,11 +82,19 @@ function renderContactOnTheView(contactsArray) {
             }
         }
 
+        var contactTelephoneNo;
+
+        if (contactsArray[i].contactTelephoneNo.length == 9) {
+            contactTelephoneNo = "0" + contactsArray[i].contactTelephoneNo;
+        } else {
+            contactTelephoneNo = contactsArray[i].contactTelephoneNo;
+        }
+
         var contact = new app.SingleContact({
             contactId: contactsArray[i].contactId,
             contactName: contactsArray[i].contactName,
             contactEmail: contactsArray[i].contactEmail,
-            contactTelephoneNo: contactsArray[i].contactTelephoneNo,
+            contactTelephoneNo: contactTelephoneNo,
             contactTags: tags,
 
         });

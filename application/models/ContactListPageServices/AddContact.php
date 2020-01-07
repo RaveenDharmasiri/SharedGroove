@@ -75,7 +75,7 @@ class AddContact extends CI_Model
     {
         if (!$tags['friends'] == null) {
             $contactTag = array(
-                'tagType' => $tags['friends'] ,
+                'tagType' => $tags['friends'],
                 'contactId' => $contactId,
             );
 
@@ -84,7 +84,7 @@ class AddContact extends CI_Model
 
         if (!$tags['work'] == null) {
             $contactTag = array(
-                'tagType' => $tags['work'] ,
+                'tagType' => $tags['work'],
                 'contactId' => $contactId,
             );
 
@@ -93,7 +93,7 @@ class AddContact extends CI_Model
 
         if (!$tags['family'] == null) {
             $contactTag = array(
-                'tagType' => $tags['family'] ,
+                'tagType' => $tags['family'],
                 'contactId' => $contactId,
             );
 

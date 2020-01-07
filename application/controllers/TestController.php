@@ -10,22 +10,24 @@ class TestController extends CI_Controller {
         var_dump($allContacts);
     }
 
-    public function contact_post()
+    public function addContact()
     {
         $datax = json_decode(file_get_contents('php://input'), true);
 
-        var_dump($datax);
 
-        $name = $datax['name'];
-        $email = $datax['email'];
-        $telephoneNo = $datax['telephoneNo'];
+        $name = "sdfsdfsdf";
+        $email = "dfsdf@gmail.com";
+        $telephoneNo = 6786785684;
+        $tags = array(
+            'friends'=> "Friends", 'work' =>null, 'family'=> null
+        );
 
-        // $this->load->model('ContactListPageServices/AddContact');
-        // $response = $this->AddContact->addContactDetailsToDB($name, $email, $telephoneNo);
+        $this->load->model('ContactListPageServices/AddContact');
+        $response = $this->AddContact->addContactDetailsToDB($name, $email, $telephoneNo, $tags);
 
 
         $data = array (
-            'datax' => $datax['name'],
+            'datax' => $response,
         );
         
         var_dump($data);

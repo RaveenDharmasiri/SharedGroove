@@ -10,7 +10,7 @@ var contactList = new app.ContactsCollection();
 
 $(document).ready(function() {
 
-    fetch_data();
+    fetchAllContacts();
 
     $('#add_button').click(function() {
         $('input[name="tag1"]').attr('checked', false);
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 
     $('#load_all_contacts').click(function() {
-        fetch_data();
+        fetchAllContacts();
     });
 
     $('#action').click(function() {
@@ -54,7 +54,7 @@ $(document).ready(function() {
     });
 });
 
-function fetch_data() {
+function fetchAllContacts() {
     restApiCall.fetch({
         data: {
             'searchName': name,
@@ -75,7 +75,11 @@ function renderContactOnTheView(contactsArray) {
         var tags = '';
 
         for (y = 0; y < contactsArray[i].contactTags.length; y++) {
-            tags += contactsArray[i].contactTags[y] + " ,";
+            if (y == contactsArray[i].contactTags.length - 1) {
+                tags += contactsArray[i].contactTags[y];
+            } else {
+                tags += contactsArray[i].contactTags[y] + ",";
+            }
         }
 
         var contact = new app.SingleContact({
@@ -94,7 +98,7 @@ function renderContactOnTheView(contactsArray) {
 
     $("#contact-table").html(contactsListView.render().el);
 
-    $('#contact-table').append("<thead><tr><th>Name</th><th>Telephone No</th><th>Email</th><th>Tags</th><th>Edit</th><th>Delete</th></tr></thead>");
+    $('#contact-table').append("<thead><tr><th>Name</th><th>Email</th><th>Telephone No</th><th>Tags</th><th>Edit</th><th>Delete</th></tr></thead>");
 }
 
 function editContactPopUp(id) {
@@ -163,35 +167,40 @@ function addContact() {
             $('#message').html('Please add tags for the contact');
             $('#message').show().fadeOut(2000);
         } else {
-            if (Number.isInteger(telephoneNo)) {
-                var contactDetails = {
-                    'name': name,
-                    'email': email,
-                    'telephoneNo': telephoneNo,
-                    'tags': {
-                        'friends': isFriendChecked,
-                        'work': isWorkChecked,
-                        'family': isFamilyChecked
+            if (validateEmail(email)) {
+                if (Number.isInteger(telephoneNo)) {
+                    var contactDetails = {
+                        'name': name,
+                        'email': email,
+                        'telephoneNo': telephoneNo,
+                        'tags': {
+                            'friends': isFriendChecked,
+                            'work': isWorkChecked,
+                            'family': isFamilyChecked
+                        }
                     }
-                }
 
-                restApiCall.save(contactDetails, {
-                    async: false,
-                    success: function(data) {
-                        fetch_data();
-                        console.log(data);
-                        $('#user_form')[0].reset();
-                        $('#message').html(data.attributes.response);
-                        $('#message').show().fadeOut(2000);
-                    },
-                    error: function(err) {
-                        console.log(err);
-                        $('#message').html('Failed to add new contact');
-                        $('#message').show().fadeOut(2000);
-                    }
-                });
+                    restApiCall.save(contactDetails, {
+                        async: false,
+                        success: function(data) {
+                            fetchAllContacts();
+                            console.log(data);
+                            $('#user_form')[0].reset();
+                            $('#message').html(data.attributes.response);
+                            $('#message').show().fadeOut(2000);
+                        },
+                        error: function(err) {
+                            console.log(err);
+                            $('#message').html('Failed to add new contact');
+                            $('#message').show().fadeOut(2000);
+                        }
+                    });
+                } else {
+                    $('#message').html('Your telephone number is wrong');
+                    $('#message').show().fadeOut(2000);
+                }
             } else {
-                $('#message').html('Your telephone number is wrong');
+                $('#message').html('Contact email format is wrong');
                 $('#message').show().fadeOut(2000);
             }
         }
@@ -199,6 +208,11 @@ function addContact() {
         $('#message').html('Fields are empty');
         $('#message').show().fadeOut(2000);
     }
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
 
 function editContact() {
@@ -244,7 +258,7 @@ function editContact() {
                     type: 'PUT',
                     async: false,
                     success: function(data) {
-                        fetch_data();
+                        fetchAllContacts();
                         console.log(data);
                         $('#message').html(data.attributes.response);
                         $('#message').show().fadeOut(2000);
@@ -271,13 +285,13 @@ function deleteContact() {
         contentType: 'application/json',
         data: JSON.stringify({ contactId: userModel.get('contactId') }),
         success: function(data) {
-            fetch_data();
+            fetchAllContacts();
             console.log(data);
             $('#delete-message').html(data.attributes.response);
             $('#delete-message').show().fadeOut(2000);
         },
         error: function(error) {
-            fetch_data();
+            fetchAllContacts();
             $('#delete-message').html('Deleted the contact');
             $('#delete-message').show().fadeOut(2000);
         }

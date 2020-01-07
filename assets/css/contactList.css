@@ -10,6 +10,10 @@ body {
     cursor: pointer !important;
 }
 
+thead tr th {
+    text-align: center;
+}
+
 tr {
     text-align: center;
 }
@@ -21,13 +25,3 @@ tr td input {
     color: #fed800;
     padding: 4px;
 }
-
-
-/* 
-.btn-edit {
-    border: solid #212529 2px;
-    background: #212529;
-    border-radius: 10px;
-    color: #fed800;
-    padding: 4px;
-} */

@@ -1,10 +1,8 @@
 var contactsArray;
 var editingContactId;
-var deletingContactId;
 var userModel;
 
 var restApiCall = new app.RestApiCall();
-
 
 var contactList = new app.ContactsCollection();
 
@@ -82,11 +80,19 @@ function renderContactOnTheView(contactsArray) {
             }
         }
 
+        var contactTelephoneNo;
+
+        if (contactsArray[i].contactTelephoneNo.length == 9) {
+            contactTelephoneNo = "0" + contactsArray[i].contactTelephoneNo;
+        } else {
+            contactTelephoneNo = contactsArray[i].contactTelephoneNo;
+        }
+
         var contact = new app.SingleContact({
             contactId: contactsArray[i].contactId,
             contactName: contactsArray[i].contactName,
             contactEmail: contactsArray[i].contactEmail,
-            contactTelephoneNo: contactsArray[i].contactTelephoneNo,
+            contactTelephoneNo: contactTelephoneNo,
             contactTags: tags,
 
         });

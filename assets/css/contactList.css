@@ -10,6 +10,10 @@ body {
     cursor: pointer !important;
 }
 
+thead tr th {
+    text-align: center;
+}
+
 tr {
     text-align: center;
 }

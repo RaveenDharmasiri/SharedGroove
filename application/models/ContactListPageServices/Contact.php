@@ -24,14 +24,6 @@ class Contact
         return $this->name;
     }
 
-    // public function setSurname($surname) {
-    //     $this->surname = $surname;
-    // }
-
-    // public function getSurname() {
-    //     return $this->surname;
-    // }
-
     public function setEmail($email) {
         $this->email = $email;
     }

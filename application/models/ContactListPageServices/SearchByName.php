@@ -12,7 +12,7 @@ class SearchByName extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('Contact');
-        $this->db->where('contactName', $name);
+        $this->db->like('contactName', $name);
         $contactQuery = $this->db->get();
 
         $contactList = array();
